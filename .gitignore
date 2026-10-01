@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments (recreated from pyproject.toml + uv.lock)
+.venv/
+
+# Secrets: never commit these
+.env
+.env.*
+*.pem
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ML experiment output (tracked elsewhere: MLflow, DVC, model registry)
+mlruns/
+wandb/
+*.ckpt
+*.pt
+*.onnx
+*.tflite
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
