@@ -31,3 +31,11 @@ wandb/
 .vscode/
 .idea/
 .DS_Store
+
+# Data: keep the folder structure (.gitkeep) but never the files (tracked with DVC later)
+data/*/*
+!data/*/.gitkeep
+
+# Trained and exported models: large and reproducible
+models/*
+!models/.gitkeep
