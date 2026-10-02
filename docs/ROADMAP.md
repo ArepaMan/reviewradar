@@ -3,6 +3,13 @@
 Each phase ends with something demonstrable. Stopping after any phase still leaves a coherent project.
 
 - [ ] **Phase 0 — Setup (week 1):** `uv` project, folder layout, ruff, pytest, pre-commit, first CI workflow.
+  - [x] `uv` project, Python 3.12 pinned, `.gitignore`
+  - [x] ruff + pytest, first smoke test
+  - [x] pre-commit hooks (hygiene, ruff, pytest)
+  - [x] first CI workflow (GitHub Actions running pre-commit), green
+  - [ ] folder layout (owner designs it)
+  - [ ] `requires-python` upper bound (`<3.13`) before adding TensorFlow
+  - [ ] Phase 0 wrap-up: owner rewrites `LEARNING_LOG.md` in own words; Claude builds the quiz artifact from `docs/QUIZ_SEED.md`
 - [ ] **Phase 1 — Data & baselines (weeks 1–3):** dataset choice, Postgres + SQL queries, DVC, EDA, TF-IDF + logistic regression / XGBoost / LightGBM, evaluation harness with bootstrap CIs, calibration, error analysis.
   *Done when:* one command reproduces the baseline table.
 - [ ] **Phase 2 — Deep model (weeks 4–6):** PyTorch + Hugging Face fine-tuning, domain-adaptive pretraining, augmentation experiments, MLflow tracking, Optuna tuning.
