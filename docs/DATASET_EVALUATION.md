@@ -14,7 +14,7 @@ The owner is evaluating four candidates one at a time, then decides. Record the 
 | Dataset | Status | Link |
 |---|---|---|
 | Amazon Reviews 2023 | Evidence collected (below) | https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023 and https://amazon-reviews-2023.github.io/ |
-| Bitext customer support | Waiting for the owner's evidence (license, columns, intents, 15-20 sample rows) | https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset |
+| Bitext customer support | Partial evidence (below); still missing sample rows as text | https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset |
 | Banking77 | Waiting | https://huggingface.co/datasets/PolyAI/banking77 |
 | CFPB Consumer Complaint Database | Waiting | https://www.consumerfinance.gov/data-research/consumer-complaints/ |
 
@@ -40,5 +40,24 @@ Scorecard (Claude's view so far):
 | Later phases | Strong: product descriptions for RAG, timestamps (1996-2023) for drift |
 | License | Unclear |
 
+## Bitext customer support: evidence so far
+- Fields: `flags` (language-generation tags), `instruction` (the customer's request, the text to classify), `category` (10 high-level), `intent` (the fine label), `response` (an example assistant reply).
+- Specs from the card: use case intent detection, vertical customer service, 27 intents in 10 categories, 26,872 question/answer pairs (about 1,000 per intent), 30 entity/slot types, 12 language-generation tags.
+- Categories shown: ACCOUNT, CANCELLATION_FEE, DELIVERY, FEEDBACK, INVOICE, NEWSLETTER, ORDER, PAYMENT, REFUND, SHIPPING_ADDRESS.
+- Intents shown in the screenshot: 20 (create_account, delete_account, edit_account, switch_account, check_cancellation_fee, delivery_options, complaint, review, check_invoice, get_invoice, newsletter_subscription, cancel_order, change_order, place_order, check_payment_methods, payment_issue, check_refund_policy, track_refund, change_shipping_address, set_up_shipping_address). The card says 27. **Discrepancy: owner to check the full list and the actual number of unique values in the `intent` column.**
+- License: cdla-sharing-1.0 (Community Data License Agreement, sharing). Permissive enough for use and for sharing derived work under the same terms; owner should read it once and note the attribution/sharing conditions.
+- Still needed: 15-20 `instruction` rows as text, and whether the data is synthetic (the card says it is generated; confirm the wording).
+
+Scorecard (Claude's view so far, Bitext):
+| Criterion | Bitext |
+|---|---|
+| Label meaning | Strong: intent and category are routing decisions (which team or flow handles this) |
+| Text realism | Probably weak: generated from templates, likely clean and repetitive (confirm with samples) |
+| Difficulty and balance | Probably too easy: about 1,000 per intent, so balanced, but a TF-IDF model may score near the ceiling and leave no room to show a transformer |
+| Size and cost | Excellent: 26,872 rows, trivial for a laptop |
+| Phase 1 fit (SQL, Postgres) | Weak: one flat table, nothing to join |
+| Later phases | Medium: `response` could seed RAG answers, but there are no timestamps, so drift would have to be simulated |
+| License | Good: cdla-sharing-1.0 |
+
 ## Next
-Owner sends Bitext evidence next; then Banking77, then CFPB. Claude compares all four on the same criteria; the owner decides and writes a one-paragraph justification; then the decision goes into `DECISIONS.md`.
+Owner sends Bitext sample rows and the intent count check; then Banking77, then CFPB. Claude compares all four on the same criteria; the owner decides and writes a one-paragraph justification; then the decision goes into `DECISIONS.md`.
