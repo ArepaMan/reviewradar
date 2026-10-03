@@ -28,8 +28,10 @@ Overwrite this at the end of every session.
 - Nothing.
 
 ## Next step
-1. BUILD THE QUIZ ARTIFACT the owner asked for: an interactive artifact to test themselves on Phase 0 concepts and work, reusable after Phase 0 to retain knowledge. Use `docs/QUIZ_SEED.md` (42 questions with answers and the owner's real mistakes) as the question bank. Load the `artifact-design` and `artifact-capabilities` skills first; progress and weak spots should persist (use a runtime capability, not browser storage alone). Suggested features: mixed question types (multiple choice, "what does this command do", fix-the-bug, short answer with reveal), spaced repetition on missed items, topic filters, a score history, and a way to add questions later from `QUIZ_SEED.md`.
-2. Then Phase 1: walk the owner through choosing the dataset (Bitext customer-support vs Amazon Reviews), then Postgres + SQL, DVC, EDA and baselines. Let the owner propose approaches first.
+1. The Phase 0 quiz artifact is BUILT and published: https://claude.ai/artifact/WAVGDedpkvkvMEHHgSuaqb (private to the owner). Source: `docs/quiz/index.html` (the question bank is the `QUESTIONS` array near the top of the script; ids are stable because progress is stored by id). Progress is saved per person in the artifact's `db` capability under `data/users/<id>/quiz` (fallback: browser storage). Scheduling is a 5-box Leitner system (intervals 1, 3, 7, 14, 30 days; a miss resets to box 1, due today).
+   - To add questions after a later phase: add them to `docs/QUIZ_SEED.md`, add matching entries to `QUESTIONS` (new ids, topic keys `env`, `shell`, `git`, `test`, `ci` or a new topic added to `TOPICS`), then republish the same artifact with `url` set to the link above (read it first), passing `capabilities: {db: {}, user: {}}`. Do not change existing ids.
+   - Keep the page's design tokens and structure; verify with Playwright (Chromium is at `/opt/pw-browsers`) before republishing.
+2. Phase 1: walk the owner through choosing the dataset (Bitext customer-support vs Amazon Reviews), then Postgres + SQL, DVC, EDA and baselines. Let the owner propose approaches first.
 
 ## Blockers / open questions
 - Owner's homework still open: difference between `apt upgrade` and `apt full-upgrade`; explain in their own words what `check-added-large-files` does and how the `data/*/*` rule helps.
