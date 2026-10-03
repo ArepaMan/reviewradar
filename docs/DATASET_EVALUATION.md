@@ -16,7 +16,7 @@ The owner is evaluating four candidates one at a time, then decides. Record the 
 | Amazon Reviews 2023 | Evidence collected (below) | https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023 and https://amazon-reviews-2023.github.io/ |
 | Bitext customer support | Partial evidence (below); still missing sample rows as text | https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset |
 | Banking77 | Evidence collected (below); sample rows still missing | https://huggingface.co/datasets/PolyAI/banking77 |
-| CFPB Consumer Complaint Database | Waiting | https://www.consumerfinance.gov/data-research/consumer-complaints/ |
+| CFPB Consumer Complaint Database | Evidence collected (below); sample narratives still missing | https://www.consumerfinance.gov/data-research/consumer-complaints/ |
 
 What to collect for each remaining candidate: license text, row count, column names, the label list or label count, and 15-20 sample rows pasted as text. For CFPB also: which column is the label (Product or Issue) and how many narratives exist. Do not commit data files (`data/*/*` is ignored).
 
@@ -78,5 +78,36 @@ Scorecard (Claude's view so far, Banking77):
 | Later phases | Medium: no timestamps, so drift must be simulated; no document corpus for RAG (would need to write or source help articles) |
 | License | Good: CC BY 4.0 |
 
+## CFPB Consumer Complaint Database: evidence so far
+- Source: US Consumer Financial Protection Bureau, https://www.consumerfinance.gov/data-research/consumer-complaints/ . Field reference (owner's PDF of the API docs): Date received, Product, Sub-product, Issue, Sub-issue, Company public response, Company, State, ZIP code, Tags, Submitted via, Date sent to company, Company response to consumer, Timely response?, Complaint ID. Product, Sub-product, Issue, Sub-issue are categorical; Issue values depend on Product, Sub-issue on Product and Issue.
+- **Gap:** the PDF has no row for the free-text complaint narrative (`Consumer complaint narrative`), which would sit between Sub-issue and Company public response. It may be cropped by the page break, or the PDF may omit it. Owner must confirm the column exists in the CSV and what share of complaints have it (narratives are published only with consumer consent, so many rows are empty; unverified).
+- Size (owner's download dialog): all complaint data 18,167,713 complaints (zipped CSV); the filtered result shown was 12,457,569 (filter not recorded) and filtered downloads are capped at 100,000. So: download the full ZIP once, or use the API with filters, then sample.
+- License: not yet checked. It is a US government publication and the CFPB says its source code is public domain; owner to find the data terms on the site and record them. Narratives are scrubbed of personal information (redaction tokens like `XXXX` expected; verify in samples).
+- Label candidates: `Product` (about 20 values, taxonomy renamed over the years, imbalanced) or `Issue` (hundreds of values, depends on Product). Real routing decision: which team should handle this complaint.
+
+Scorecard (Claude's view so far, CFPB):
+| Criterion | CFPB |
+|---|---|
+| Label meaning | Very strong: product and issue are what a complaint-routing team decides; it is the real thing, not a simulation |
+| Text realism | Very strong: real consumers writing long, messy, emotional narratives with real typos and redaction tokens |
+| Difficulty and balance | Good: imbalanced and noisy, long text, so a transformer should beat TF-IDF visibly; but check for label noise and renamed products |
+| Size and cost | Needs sampling (millions of rows); long texts (many over 256 tokens) raise Phase 2 GPU cost; choose a date window and cap near 100K-200K |
+| Phase 1 fit (SQL, Postgres) | Good: rich columns (dates, company, state, product) for aggregations, window functions, time filters; normalize into tables (companies, products, complaints) to practise joins |
+| Later phases | Very strong: `Date received` gives natural drift (time splits, taxonomy changes); narratives can be the RAG corpus (similar past complaints); `Company response` gives a second signal |
+| License | Likely open (government data) but unverified |
+
+## Overall comparison (Claude's view, owner decides)
+| Criterion | Amazon | Bitext | Banking77 | CFPB |
+|---|---|---|---|---|
+| Label meaning | Weak | Strong | Strong | Very strong |
+| Text realism | Strong | Weak (synthetic) | Medium | Very strong |
+| Difficulty (room for a transformer) | Moderate | Too easy | Good | Good |
+| Size and cost | Sample needed | Excellent | Excellent | Sample needed, long text |
+| SQL and Postgres fit | Very strong | Weak | Weak | Good |
+| Later phases (RAG, drift) | Strong | Medium | Medium | Very strong |
+| License | Unclear | Good | Good | Verify |
+
+Claude's recommendation: **CFPB, with `Product` (possibly merged into fewer groups) as the label and a sample of 100K-200K narratives from a recent date window.** It matches the project's stated domain (support-ticket triage plus RAG), has real text, and gives drift and SQL for free. Runner-up: Banking77, as a fast, clean, license-safe fallback if CFPB narratives turn out too scarce or too long for the GPU budget. Owner writes the final justification and `DECISIONS.md` entry.
+
 ## Next
-Owner sends CFPB evidence next (Bitext and Banking77 collected; sample rows from several labels still optional). Claude compares all four on the same criteria; the owner decides and writes a one-paragraph justification; then the decision goes into `DECISIONS.md`.
+All four candidates have evidence. Owner: (1) confirm the CFPB narrative column and share with narratives, (2) find the CFPB data terms, (3) decide and write a one-paragraph justification; then Claude records it in `DECISIONS.md`. Original plan: the owner decides and writes a one-paragraph justification; then the decision goes into `DECISIONS.md`.
