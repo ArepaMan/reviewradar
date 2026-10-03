@@ -1,5 +1,7 @@
 # Quiz seed: Phase 0 question bank
 
+> **Status:** this file was the original seed (42 questions). The full quiz bank now lives in `docs/quiz/index.html` (194 questions, 36 subtopics, four question types). Keep this file as the record of the Phase 0 mistakes the quiz was built around, and add new concepts to the bank in `docs/quiz/index.html` when later phases introduce them.
+
 Source material for the owner's self-test artifact. Each item: topic, question, answer, and the mistake the owner actually made (if any), because real mistakes are the best questions. Add new items as later phases add concepts.
 
 ## Python environments and tooling

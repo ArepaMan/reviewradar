@@ -61,7 +61,8 @@
 body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; padding-inline: 16px; padding-block: 24px 56px; }
 #wrap { max-width: 760px; margin-inline: auto; }
 h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
-button { font: inherit; color: inherit; cursor: pointer; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
 code { font-family: var(--mono); font-size: 0.88em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
 pre.blk { font-family: var(--mono); font-size: 0.85rem; background: var(--code-bg); padding: 10px 12px; border-radius: 6px; margin: 0; overflow-x: auto; white-space: pre; line-height: 1.5; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -71,7 +72,7 @@ pre.blk { font-family: var(--mono); font-size: 0.85rem; background: var(--code-b
 .chip { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
 .chip.ok { color: var(--good); border-color: var(--good); }
 h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); line-height: 1.1; }
-.lede { color: var(--muted); margin: 8px 0 0; max-width: 56ch; }
+.lede { color: var(--muted); margin: 8px 0 0; max-width: 58ch; }
 
 .strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block: 24px; border-block: 1px solid var(--line); }
 .strip > div { padding: 14px 4px 14px 0; }
@@ -86,7 +87,9 @@ h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); line-height: 1.1; }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn.primary:hover:not(:disabled) { filter: brightness(1.08); }
 .btn.small { padding: 6px 12px; font-size: 0.88rem; }
+.btn[aria-pressed="true"] { border-color: var(--accent); background: var(--code-bg); }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.sizes { margin-top: 14px; font-size: 0.88rem; color: var(--muted); }
 
 section.block { margin-top: 36px; }
 section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
@@ -96,9 +99,9 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 .topic:last-child { border-bottom: 1px solid var(--line); }
 .topic .name { font-weight: 600; }
 .topic .sub { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.topic .covers { grid-column: 1 / -1; font-size: 0.78rem; color: var(--muted); margin-top: -2px; }
 .bar { display: flex; height: 10px; border-radius: 3px; overflow: hidden; background: var(--line); gap: 1px; }
 .bar span { display: block; min-width: 0; }
-.s-new { background: var(--line); }
 .s-learn { background: var(--warn); }
 .s-solid { background: var(--accent); }
 .s-master { background: var(--good); }
@@ -114,7 +117,7 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 .empty { border: 1px dashed var(--line); border-radius: 8px; padding: 16px; color: var(--muted); font-size: 0.92rem; }
 
 .qhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.ticks { display: flex; gap: 3px; margin-bottom: 20px; }
+.ticks { display: flex; gap: 2px; margin-bottom: 20px; }
 .ticks span { flex: 1; height: 5px; border-radius: 2px; background: var(--line); min-width: 0; }
 .ticks .ok { background: var(--good); }
 .ticks .no { background: var(--bad); }
@@ -123,6 +126,7 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 .tags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
 .tag { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .pill { font-size: 0.74rem; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--warn-bg); color: var(--warn); }
+.pill.kind { background: var(--code-bg); color: var(--muted); font-family: var(--mono); font-weight: 500; }
 .q { font-family: var(--display); font-weight: 600; font-size: clamp(1.1rem, 3.4vw, 1.35rem); line-height: 1.3; margin: 0 0 18px; text-wrap: pretty; }
 .opts { display: grid; gap: 10px; }
 .opt { display: grid; grid-template-columns: 1.7em minmax(0, 1fr); gap: 12px; align-items: start; text-align: left; width: 100%; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 12px 14px; transition: border-color 0.15s, background 0.15s; }
@@ -133,6 +137,11 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 .opt.right { border-color: var(--good); background: var(--good-bg); }
 .opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
 .opt.dim { opacity: 0.55; }
+.opt.picked { border-color: var(--accent); background: var(--code-bg); }
+.opt.picked .k { color: var(--accent); font-weight: 600; }
+.cmdbox { display: flex; gap: 10px; flex-wrap: wrap; }
+.cmdbox input { flex: 1 1 260px; min-width: 0; font-family: var(--mono); font-size: 0.95rem; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.cmdbox input:disabled { opacity: 0.8; }
 .feedback { margin-top: 18px; border-radius: 8px; padding: 14px 16px; }
 .feedback.ok { background: var(--good-bg); }
 .feedback.no { background: var(--bad-bg); }
@@ -140,6 +149,11 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 .feedback.ok .v { color: var(--good); }
 .feedback.no .v { color: var(--bad); }
 .feedback p { margin: 4px 0 0; }
+.feedback .exp { margin: 8px 0 0; display: grid; gap: 6px; }
+.feedback .exp .l { font-size: 0.78rem; color: var(--muted); }
+.seq { margin: 8px 0 0; padding-left: 1.4em; display: grid; gap: 4px; }
+.seq li.bad::marker { color: var(--bad); font-weight: 700; }
+.seq li.good::marker { color: var(--good); font-weight: 700; }
 .answerbox { margin-top: 4px; border-left: 3px solid var(--accent); padding: 8px 14px; background: var(--bg); border-radius: 0 8px 8px 0; }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 .hint { font-size: 0.78rem; color: var(--muted); margin-top: 14px; font-family: var(--mono); }
@@ -158,6 +172,7 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 @media (max-width: 560px) {
   .topic { grid-template-columns: minmax(0, 1fr) auto; }
   .topic .bar-wrap { grid-column: 1 / -1; order: 3; }
+  .topic .covers { order: 4; }
   .log li { grid-template-columns: 4.4em 3.4em minmax(0, 1fr); }
   .log .d { display: none; }
   .strip .n { font-size: 1.8rem; }
@@ -172,221 +187,644 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
   "use strict";
 
   /* ---------------------------------------------------------------
-     Question bank. Source of truth: docs/QUIZ_SEED.md in the repo.
-     a = correct answer, w = wrong options, x = explanation,
-     m = a mistake that really happened in Phase 0, r = recall (self-graded).
-     Keep ids stable: progress is stored by id.
+     Question bank. Keep ids stable: progress is stored by id.
+     mc(id, topic, subtopic, question, correct, [3 wrong], explanation, hitInPhase0)
+     rec(id, topic, subtopic, question, answer)               self-graded recall
+     cmd(id, topic, subtopic, question, [accepted commands], explanation)   type the command
+     ord(id, topic, subtopic, question, [steps in correct order], explanation)
      --------------------------------------------------------------- */
+  function mc(id, t, s, q, a, w, x, m) { return { id: id, t: t, s: s, q: q, a: a, w: w, x: x || "", m: !!m }; }
+  function rec(id, t, s, q, a) { return { id: id, t: t, s: s, q: q, a: a, r: true }; }
+  function cmd(id, t, s, q, acc, x) { return { id: id, t: t, s: s, q: q, cmd: acc, x: x || "" }; }
+  function ord(id, t, s, q, steps, x) { return { id: id, t: t, s: s, q: q, o: steps, x: x || "" }; }
+
   var TOPICS = [
-    { k: "env", n: "Python environments" },
+    { k: "env", n: "Python environments & uv" },
     { k: "shell", n: "Shell, PATH & WSL" },
     { k: "git", n: "Git & GitHub" },
     { k: "test", n: "Testing & code quality" },
-    { k: "ci", n: "pre-commit & CI" }
+    { k: "ci", n: "pre-commit & CI" },
+    { k: "proj", n: "Project layout & habits" }
   ];
 
   var QUESTIONS = [
-    /* ---- Python environments ---- */
-    { id: "e1", t: "env", q: "In Python, what is `sys.path`?",
-      a: "The list of folders Python searches, in order, when you import a module",
-      w: ["The path of the script that is currently running", "A list of every package installed on the machine", "The folder where pip stores its downloads"],
-      x: "Python goes through the entries in order and uses the first match, so the order decides which package gets imported." },
-    { id: "e2", t: "env", m: true, q: "You print `sys.path` inside a virtual environment. Compared with the global Python, what is the key change?",
-      a: "The global `site-packages` entry is replaced by the venv's own `site-packages` folder",
-      w: ["The standard library entries disappear", "The list is empty until you activate the venv", "Only the current folder remains"],
-      x: "The standard library entries stay. The venv brings its own `site-packages`, and a fresh one holds only `pip`, so installs in one project cannot disturb another." },
-    { id: "e3", t: "env", m: true, q: "Which statement about isolation and pinning is correct?",
-      a: "A venv isolates projects from each other; a lockfile pins exact versions so others can rebuild the environment",
-      w: ["A lockfile stops other projects from changing your packages; a venv records exact versions", "They are two names for the same thing", "Pinning only matters for the Python interpreter itself"],
-      x: "Isolation (the venv) protects the project on your machine. Pinning (the lockfile) makes the environment reproducible elsewhere. You need both." },
-    { id: "e4", t: "env", q: "What is the difference between `pyproject.toml` and `uv.lock`?",
-      a: "`pyproject.toml` says which versions you accept (ranges); `uv.lock` records the exact versions resolved, including dependencies of dependencies",
-      w: ["`pyproject.toml` holds exact versions and `uv.lock` holds comments", "`uv.lock` is generated from `.venv`", "`pyproject.toml` is only used on Windows"],
-      x: "Think \"what you want\" versus \"what you got\". Commit both files." },
-    { id: "e5", t: "env", q: "Why is `.venv/` ignored by Git but `uv.lock` committed?",
-      a: "`.venv/` is large, specific to your machine, and can be rebuilt from `uv.lock`; the lockfile is the small recipe",
-      w: ["`.venv/` contains passwords", "Git cannot store folders whose names start with a dot", "`uv.lock` is only needed on the developer's laptop"],
-      x: "Git stores the recipe, not the cooked meal. The recipe can regenerate the meal, but not the reverse." },
-    { id: "e6", t: "env", q: "What does `uv sync --locked` do differently from `uv sync`?",
-      a: "It stops with an error if `uv.lock` is out of date, instead of quietly updating it",
-      w: ["It installs only the development dependencies", "It ignores the lockfile completely", "It installs packages into the global Python"],
-      x: "CI uses `--locked` so it tests exactly what is committed. A stale lockfile becomes a loud failure instead of a silent change." },
-    { id: "e7", t: "env", m: true, q: "`requires-python = \"==3.12\"` made `uv sync` reject Python 3.12.14. Why?",
-      a: "In version specifiers `==3.12` means exactly 3.12 (that is 3.12.0), not any 3.12.x",
-      w: ["3.12.14 is newer than anything uv supports", "The operator must be `=`, not `==`", "`uv` cannot use patch versions at all"],
-      x: "\"Any 3.12.x\" is written `==3.12.*` or `>=3.12,<3.13`. An exact patch pin such as `==3.12.14` works but is too strict." },
-    { id: "e8", t: "env", q: "Why does this project use `requires-python = \">=3.12,<3.13\"` and not `\">=3.12\"`?",
-      a: "TensorFlow supports Python only up to 3.12, and `uv.lock` has to resolve for every Python version the range allows",
-      w: ["Python 3.13 does not exist yet", "`<3.13` makes installs faster", "`uv` refuses ranges without an upper bound"],
-      x: "An unbounded range makes the lockfile cover Python 3.13 and newer, where TensorFlow has no wheels. That breaks resolution in Phase 3." },
-    { id: "e9", t: "env", m: true, q: "Why might installing a Python package need a C compiler?",
-      a: "Some libraries have C/C++ cores; if no prebuilt wheel matches your Python and OS, the installer builds from source",
-      w: ["To check your code for memory leaks", "Python cannot run without one", "To make `pip` download faster"],
-      x: "NumPy, PyTorch and others ship precompiled wheels for common setups. Brand-new Python versions often lack wheels, which triggers a source build." },
-    { id: "e10", t: "env", q: "Why should you never `pip install` into Ubuntu's own `/usr/bin/python3`?",
-      a: "The operating system's tools depend on it, so changing its packages can break them",
-      w: ["Ubuntu blocks all pip commands", "It makes Python run slower", "pip only works on Windows"],
-      x: "Work inside a project virtual environment. System Python belongs to the OS." },
-    { id: "e11", t: "env", r: true, q: "Why was Python 3.12 pinned for ReviewRadar instead of 3.14?",
-      a: "PyTorch supports 3.10 to 3.14 and TensorFlow supports 3.9 to 3.12, so 3.12 is the newest version both support. Re-check the supported ranges before adding libraries." },
+    /* ================= Python environments & uv ================= */
+    mc("e1", "env", "sys.path & imports", "In Python, what is `sys.path`?",
+      "The list of folders Python searches, in order, when you import a module",
+      ["The path of the script that is currently running", "A list of every package installed on the machine", "The folder where pip stores its downloads"],
+      "Python goes through the entries in order and uses the first match, so the order decides which package gets imported."),
+    mc("e23", "env", "sys.path & imports", "A file named `random.py` in your project folder breaks `import random`. Why?",
+      "The script's folder (or the current folder) is searched first, so your file shadows the standard library module",
+      ["`random` is a reserved word", "Python can import only one module per project", "Python deletes files that share a name with the standard library"],
+      "Never name your own files after standard library modules or installed packages."),
+    mc("e22", "env", "sys.path & imports", "Why can a test in `tests/` run `import reviewradar` although the code lives in `src/reviewradar/`?",
+      "`uv sync` installed your own project into `.venv` in editable mode, so Python finds it by name",
+      ["Python searches every folder on the disk", "pytest copies `src/` next to the tests", "Because the folder is called `src`"],
+      "That is the `~ reviewradar==0.1.0` line you saw in the `uv` output."),
+    mc("e20", "env", "virtual environments", "Physically, what is a virtual environment?",
+      "A folder with its own `site-packages` (and a link to an interpreter), used by one project",
+      ["A virtual machine running Linux", "A cloud server", "A zip file of your source code"],
+      "Deleting the folder removes everything installed in it, so venvs are disposable."),
+    mc("e2", "env", "virtual environments", "You print `sys.path` inside a virtual environment. Compared with the global Python, what is the key change?",
+      "The global `site-packages` entry is replaced by the venv's own `site-packages` folder",
+      ["The standard library entries disappear", "The list is empty until you activate the venv", "Only the current folder remains"],
+      "The standard library entries stay. The venv brings its own `site-packages`, and a fresh one holds only `pip`, so installs in one project cannot disturb another.", true),
+    mc("e21", "env", "virtual environments", "You deleted `.venv/`. What brings it back?",
+      "`uv sync`, because `pyproject.toml` and `uv.lock` describe it completely",
+      ["`git pull`", "Reinstalling Ubuntu", "Nothing, the project is lost"]),
+    mc("e10", "env", "virtual environments", "Why should you never `pip install` into Ubuntu's own `/usr/bin/python3`?",
+      "The operating system's tools depend on it, so changing its packages can break them",
+      ["Ubuntu blocks all pip commands", "It makes Python run slower", "pip only works on Windows"],
+      "Work inside a project virtual environment. System Python belongs to the OS."),
+    mc("e3", "env", "pinning & lockfile", "Which statement about isolation and pinning is correct?",
+      "A venv isolates projects from each other; a lockfile pins exact versions so others can rebuild the environment",
+      ["A lockfile stops other projects from changing your packages; a venv records exact versions", "They are two names for the same thing", "Pinning only matters for the Python interpreter itself"],
+      "Isolation (the venv) protects the project on your machine. Pinning (the lockfile) makes the environment reproducible elsewhere. You need both.", true),
+    mc("e5", "env", "pinning & lockfile", "Why is `.venv/` ignored by Git but `uv.lock` committed?",
+      "`.venv/` is large, specific to your machine, and can be rebuilt from `uv.lock`; the lockfile is the small recipe",
+      ["`.venv/` contains passwords", "Git cannot store folders whose names start with a dot", "`uv.lock` is only needed on the developer's laptop"],
+      "Git stores the recipe, not the cooked meal. The recipe can regenerate the meal, but not the reverse."),
+    mc("e18", "env", "pinning & lockfile", "Why isn't writing `pandas==2.2.0` in `pyproject.toml` enough for full reproducibility?",
+      "Pandas' own dependencies could still change underneath you; the lockfile pins those too",
+      ["`==` is not allowed in `pyproject.toml`", "Pandas ignores version numbers", "pip cannot read `pyproject.toml`"]),
+    mc("e17", "env", "pinning & lockfile", "What is a transitive dependency?",
+      "A package that one of your dependencies needs, which you did not ask for directly",
+      ["A dependency installed globally", "A dependency that only works on Linux", "A package that is no longer maintained"],
+      "The lockfile records transitive dependencies too, which is why pinning only your direct dependencies is not enough."),
+    mc("e6", "env", "pinning & lockfile", "What does `uv sync --locked` do differently from `uv sync`?",
+      "It stops with an error if `uv.lock` is out of date, instead of quietly updating it",
+      ["It installs only the development dependencies", "It ignores the lockfile completely", "It installs packages into the global Python"],
+      "CI uses `--locked` so it tests exactly what is committed. A stale lockfile becomes a loud failure instead of a silent change."),
+    mc("e4", "env", "pyproject.toml", "What is the difference between `pyproject.toml` and `uv.lock`?",
+      "`pyproject.toml` says which versions you accept (ranges); `uv.lock` records the exact versions resolved, including dependencies of dependencies",
+      ["`pyproject.toml` holds exact versions and `uv.lock` holds comments", "`uv.lock` is generated from `.venv`", "`pyproject.toml` is only used on Windows"],
+      "Think \"what you want\" versus \"what you got\". Commit both files."),
+    mc("e25", "env", "pyproject.toml", "What does `pytest>=9.1.1` in `pyproject.toml` mean?",
+      "Any pytest version 9.1.1 or newer is acceptable; the lockfile decides which exact one is installed",
+      ["Exactly 9.1.1", "Any version below 9.1.1", "Only 9.1.1 and 9.1.2"]),
+    mc("e15", "env", "pyproject.toml", "Which section of `pyproject.toml` lists tools needed only for development?",
+      "`[dependency-groups]` (the `dev` group)",
+      ["`[project.scripts]`", "`[build-system]`", "`[tool.git]`"],
+      "`[project].dependencies` lists what the app needs at runtime, `[build-system]` says how to package it, and `[project.scripts]` defines commands."),
+    mc("e16", "env", "pyproject.toml", "What is `[project.scripts]` for in `pyproject.toml`?",
+      "Defining a command (for example `reviewradar`) that runs a function in your package",
+      ["Running scripts before every commit", "Listing the Python versions allowed", "Listing files Git should ignore"],
+      "`reviewradar = \"reviewradar:main\"` means the command calls `main` from the `reviewradar` package."),
+    mc("e12", "env", "uv commands", "What does `uv init` create in a folder?",
+      "A `pyproject.toml`, a `.python-version` file and a `src/<name>/` package (plus a README if there is none)",
+      ["A `.venv` folder with all dependencies installed", "A Dockerfile and a CI workflow", "Only an empty `README.md`"],
+      "The venv appears later, on the first `uv sync` or `uv run`."),
+    mc("e13", "env", "uv commands", "What does `uv run pytest` do that plain `pytest` might not?",
+      "It runs pytest inside the project's environment, creating or updating `.venv` first if needed",
+      ["It runs the tests twice for safety", "It installs pytest globally", "It skips the lockfile and downloads the newest pytest"]),
+    mc("e14", "env", "uv commands", "What does `--dev` mean in `uv add --dev ruff pytest`?",
+      "The packages are only needed while developing (a dependency group), not to run the app",
+      ["The packages install into a separate Python version", "The packages are installed with administrator rights", "The packages are removed after each commit"],
+      "They are listed under `[dependency-groups]` in `pyproject.toml`."),
+    mc("e24", "env", "Python versions", "What is `.python-version` for?",
+      "It holds the exact interpreter version for the project (such as `3.12`); `uv` reads it to pick or download that Python",
+      ["It is the version number of your project", "It is the Git version", "It lists every Python installed on the machine"]),
+    mc("e7", "env", "Python versions", "`requires-python = \"==3.12\"` made `uv sync` reject Python 3.12.14. Why?",
+      "In version specifiers `==3.12` means exactly 3.12 (that is 3.12.0), not any 3.12.x",
+      ["3.12.14 is newer than anything uv supports", "The operator must be `=`, not `==`", "`uv` cannot use patch versions at all"],
+      "\"Any 3.12.x\" is written `==3.12.*` or `>=3.12,<3.13`. An exact patch pin such as `==3.12.14` works but is too strict.", true),
+    mc("e8", "env", "Python versions", "Why does this project use `requires-python = \">=3.12,<3.13\"` and not `\">=3.12\"`?",
+      "TensorFlow supports Python only up to 3.12, and `uv.lock` has to resolve for every Python version the range allows",
+      ["Python 3.13 does not exist yet", "`<3.13` makes installs faster", "`uv` refuses ranges without an upper bound"],
+      "An unbounded range makes the lockfile cover Python 3.13 and newer, where TensorFlow has no wheels. That breaks resolution in Phase 3."),
+    rec("e11", "env", "Python versions", "Why was Python 3.12 pinned for ReviewRadar instead of 3.14?",
+      "PyTorch supports 3.10 to 3.14 and TensorFlow supports 3.9 to 3.12, so 3.12 is the newest version both support. Re-check the supported ranges before adding libraries."),
+    mc("e26", "env", "wheels & compilers", "What is a wheel?",
+      "A prebuilt package file that installs without compiling",
+      ["A file that rolls back an installation", "A Python version manager", "A kind of virtual environment"],
+      "Wheels are built for combinations of Python version, OS and CPU. If none matches, the installer compiles from source."),
+    mc("e9", "env", "wheels & compilers", "Why might installing a Python package need a C compiler?",
+      "Some libraries have C/C++ cores; if no prebuilt wheel matches your Python and OS, the installer builds from source",
+      ["To check your code for memory leaks", "Python cannot run without one", "To make `pip` download faster"],
+      "NumPy, PyTorch and others ship precompiled wheels for common setups. Brand-new Python versions often lack wheels, which triggers a source build.", true),
+    mc("e27", "env", "wheels & compilers", "Why do brand-new Python versions often cause slow or failing installs?",
+      "Libraries may not have prebuilt wheels for them yet, so installers fall back to compiling from source",
+      ["New Python versions delete old packages", "pip refuses to run on new versions", "Wheels only exist for old Python versions"],
+      "This is one reason the project pins Python 3.12 and not 3.14."),
+    cmd("k14", "env", "uv commands", "Type the command that adds `ruff` as a development dependency with uv.", ["uv add --dev ruff"], "It updates `pyproject.toml` and `uv.lock` together."),
+    cmd("k15", "env", "uv commands", "Type the command that runs pytest inside the project's environment.", ["uv run pytest"]),
+    cmd("k16", "env", "uv commands", "Type the command that builds `.venv` from `uv.lock` and fails if the lockfile is stale.", ["uv sync --locked"]),
+    cmd("k23", "env", "uv commands", "Type the command that lists the Python versions uv can use or download.", ["uv python list"]),
+    ord("o5", "env", "uv commands", "Put these steps in order for starting a new uv project.",
+      ["`uv init --python 3.12`", "`uv add --dev ruff pytest`", "`uv run pytest`", "Commit `pyproject.toml` and `uv.lock` together"],
+      "`uv add` creates the environment for you, so a separate `uv sync` is optional here."),
 
-    /* ---- Shell, PATH & WSL ---- */
-    { id: "s1", t: "shell", q: "You type `uv` in the terminal. How does the shell find the program?",
-      a: "It searches the folders listed in `PATH`, in order, and runs the first match",
-      w: ["It searches the whole disk for a file named `uv`", "It asks GitHub for the latest version", "It looks only in the current folder"],
-      x: "The installer put `uv` in `~/.local/bin` and added that folder to `PATH` through `.bashrc` and `.profile`." },
-    { id: "s2", t: "shell", m: true, q: "`cd ~/projects/reviewradar` failed with \"path does not exist\" in VS Code's terminal, though it works in Ubuntu. Why?",
-      a: "That terminal was PowerShell, where `~` means `C:\\Users\\manol`, not the Linux home folder",
-      w: ["The folder was deleted", "`cd` does not work in VS Code", "Git had locked the folder"],
-      x: "The same symbol expands differently in each shell. VS Code was not connected to WSL; running `code .` from Ubuntu fixes it." },
-    { id: "s3", t: "shell", q: "Which prompt shows you are in Ubuntu?",
-      a: "`mjvargas99@MSI:~/projects/reviewradar$`",
-      w: ["`PS C:\\Users\\manol>`", "`PS Microsoft.PowerShell.Core\\FileSystem::\\\\wsl.localhost\\Ubuntu\\home\\mjvargas99>`", "`C:\\Users\\manol>`"],
-      x: "The second option looks Linux-like but starts with `PS`: that is PowerShell reaching into WSL over a network path. An Ubuntu prompt reads `user@host:folder$`." },
-    { id: "s4", t: "shell", m: true, q: "In PowerShell, `where python` prints nothing although Python is installed. Why?",
-      a: "`where` is a PowerShell alias for a different command; the program you want is `where.exe`",
-      w: ["Python must be reinstalled", "`where` only works inside WSL", "PowerShell cannot find programs on the PATH"],
-      x: "Use `where.exe python` or `Get-Command python`." },
-    { id: "s5", t: "shell", q: "What is `/mnt/c` inside WSL?",
-      a: "Your Windows C: drive, seen from Linux",
-      w: ["A folder for temporary Linux files", "The folder where Ubuntu is installed", "A network drive on GitHub"],
-      x: "Keep project work in the Linux home (`~/projects/...`). It is faster and avoids permission surprises with Linux tools." },
-    { id: "s6", t: "shell", q: "Why does `apt install` need `sudo` while creating a venv does not?",
-      a: "`apt` writes to system-wide folders owned by root and shared by every user; a venv writes to your own folders",
-      w: ["`apt` downloads more data", "Venvs are not real software", "`sudo` makes commands run faster"],
-      x: "Use `sudo` only when you understand what the command does. If something asks for `sudo pip install`, stop." },
-    { id: "s7", t: "shell", m: true, q: "You typed `import sys; print(sys.path)` at the PowerShell prompt and got \"The term 'import' is not recognized\". What happened?",
-      a: "PowerShell tried to run `import` as its own command; the code has to be passed to Python, for example with `python -c \"...\"`",
-      w: ["Python is not installed", "The semicolon is invalid in PowerShell", "`sys.path` is not a valid name"],
-      x: "When something breaks, first ask which program is complaining. It tells you whose rules you broke." },
-    { id: "s8", t: "shell", m: true, q: "`curl -LsSf <url>` works but `curl -LsFf <url>` fails with \"option -LsFf: is badly used here\". Why?",
-      a: "Each letter is a separate flag, and `-F` (send form data) is a different option from `-S` (show errors)",
-      w: ["`curl` only accepts four flags", "Capital letters are not allowed", "The URL must come first"],
-      x: "One similar-looking character changes the meaning. Use the up arrow to edit the last command instead of retyping it." },
-    { id: "s9", t: "shell", r: true, q: "What are files whose names start with `.`, and how do you list them?",
-      a: "Hidden files, mostly configuration. `ls -a` lists them. For example `.bashrc` runs every time a shell starts, and `.gitignore` configures Git." },
+    /* ================= Shell, PATH & WSL ================= */
+    mc("s1", "shell", "PATH", "You type `uv` in the terminal. How does the shell find the program?",
+      "It searches the folders listed in `PATH`, in order, and runs the first match",
+      ["It searches the whole disk for a file named `uv`", "It asks GitHub for the latest version", "It looks only in the current folder"],
+      "The installer put `uv` in `~/.local/bin` and added that folder to `PATH` through `.bashrc` and `.profile`."),
+    mc("s16", "shell", "PATH", "What does `which uv` print?",
+      "The full path of the `uv` program the shell would run",
+      ["The installed version of `uv`", "A list of all Python versions", "The folder the shell is in"],
+      "`uv --version` prints the version."),
+    mc("s17", "shell", "PATH", "What does `source ~/.local/bin/env` do in the current terminal?",
+      "It re-reads that script in the current shell, so `PATH` changes take effect without opening a new terminal",
+      ["It installs `uv` again", "It deletes `.local/bin`", "It restarts Ubuntu"],
+      "A new terminal also reads `.bashrc` and `.profile`, which is why the installer edited them."),
+    mc("s18", "shell", "PATH", "`echo $PATH` prints folders separated by `:`. What does their order mean?",
+      "The shell searches left to right, so an earlier folder wins when two have a program with the same name",
+      ["It is alphabetical, just for tidiness", "The folders at the end run first", "The order does not matter"]),
+    cmd("k4", "shell", "PATH", "Type the command that prints the full path of the `uv` program your shell would run.", ["which uv"]),
+    cmd("k5", "shell", "PATH", "Type the command that prints the value of `PATH`.", ["echo $PATH", "echo \"$PATH\""]),
+    mc("s27", "shell", "reading errors", "`command not found` means:",
+      "No program with that name exists in any folder of `PATH` (or the name is mistyped)",
+      ["The program crashed", "You lack administrator rights", "The file is empty"],
+      "Check the spelling first, then whether the tool is installed and on `PATH`."),
+    mc("s7", "shell", "reading errors", "You typed `import sys; print(sys.path)` at the PowerShell prompt and got \"The term 'import' is not recognized\". What happened?",
+      "PowerShell tried to run `import` as its own command; the code has to be passed to Python, for example with `python -c \"...\"`",
+      ["Python is not installed", "The semicolon is invalid in PowerShell", "`sys.path` is not a valid name"],
+      "When something breaks, first ask which program is complaining. It tells you whose rules you broke.", true),
+    mc("s8", "shell", "reading errors", "`curl -LsSf <url>` works but `curl -LsFf <url>` fails with \"option -LsFf: is badly used here\". Why?",
+      "Each letter is a separate flag, and `-F` (send form data) is a different option from `-S` (show errors)",
+      ["`curl` only accepts four flags", "Capital letters are not allowed", "The URL must come first"],
+      "One similar-looking character changes the meaning. Use the up arrow to edit the last command instead of retyping it.", true),
+    mc("s26", "shell", "reading errors", "`bash: data/interim: Is a directory` appeared after typing `data/*` at the prompt. What happened?",
+      "The shell expanded `*` into the folder names and tried to run the first one as a command",
+      ["`data/` is protected by Git", "The shell found a Python error", "`*` is not allowed at the prompt"],
+      "`.gitignore` patterns belong inside the `.gitignore` file, where Git reads them.", true),
+    mc("s2", "shell", "WSL & Windows", "`cd ~/projects/reviewradar` failed with \"path does not exist\" in VS Code's terminal, though it works in Ubuntu. Why?",
+      "That terminal was PowerShell, where `~` means `C:\\Users\\manol`, not the Linux home folder",
+      ["The folder was deleted", "`cd` does not work in VS Code", "Git had locked the folder"],
+      "The same symbol expands differently in each shell. VS Code was not connected to WSL; running `code .` from Ubuntu fixes it.", true),
+    mc("s3", "shell", "WSL & Windows", "Which prompt shows you are in Ubuntu?",
+      "`mjvargas99@MSI:~/projects/reviewradar$`",
+      ["`PS C:\\Users\\manol>`", "`PS Microsoft.PowerShell.Core\\FileSystem::\\\\wsl.localhost\\Ubuntu\\home\\mjvargas99>`", "`C:\\Users\\manol>`"],
+      "The second option looks Linux-like but starts with `PS`: that is PowerShell reaching into WSL over a network path. An Ubuntu prompt reads `user@host:folder$`."),
+    mc("s4", "shell", "WSL & Windows", "In PowerShell, `where python` prints nothing although Python is installed. Why?",
+      "`where` is a PowerShell alias for a different command; the program you want is `where.exe`",
+      ["Python must be reinstalled", "`where` only works inside WSL", "PowerShell cannot find programs on the PATH"],
+      "Use `where.exe python` or `Get-Command python`.", true),
+    mc("s5", "shell", "WSL & Windows", "What is `/mnt/c` inside WSL?",
+      "Your Windows C: drive, seen from Linux",
+      ["A folder for temporary Linux files", "The folder where Ubuntu is installed", "A network drive on GitHub"],
+      "Keep project work in the Linux home (`~/projects/...`). It is faster and avoids permission surprises with Linux tools."),
+    mc("s21", "shell", "WSL & Windows", "Where should the project live for the best results with Linux tools such as Git and `uv`?",
+      "In the Linux filesystem, for example `~/projects/reviewradar`",
+      ["Under `/mnt/c/Users/...` on the Windows drive", "On the Desktop", "Inside `/usr/bin`"]),
+    mc("s19", "shell", "WSL & Windows", "Why can `clip.exe` (a Windows program) run from the Ubuntu terminal?",
+      "WSL adds the Windows folders to Ubuntu's `PATH` and can launch Windows programs",
+      ["Ubuntu contains a copy of `clip.exe`", "`clip.exe` is a Linux program", "It cannot; the command would fail"]),
+    mc("s20", "shell", "WSL & Windows", "How do you open the current Ubuntu folder in VS Code connected to WSL?",
+      "Run `code .` from the Ubuntu terminal (with the WSL extension installed)",
+      ["Run `wsl --install`", "Run `git clone .`", "Run `uv run code`"],
+      "The bottom-left corner of VS Code shows `WSL: Ubuntu` when it is connected."),
+    mc("s28", "shell", "WSL & Windows", "What does `wsl --install` do?",
+      "Installs WSL2 with a default Ubuntu, giving you a real Linux shell on Windows",
+      ["Installs Python on Windows", "Installs Docker", "Updates Windows"]),
+    cmd("k6", "shell", "WSL & Windows", "In PowerShell, type the command that lists where Python is installed (remember the alias trap).", ["where.exe python", "Get-Command python", "get-command python"]),
+    ord("o6", "shell", "WSL & Windows", "Put these steps in order, from a clean Windows PC to Python code in VS Code on WSL.",
+      ["Run `wsl --install` and restart", "Create your Ubuntu username and password", "Install tools such as git, curl and uv in Ubuntu", "Run `code .` from the project folder in Ubuntu"]),
+    mc("s10", "shell", "everyday commands", "What does `pwd` print?",
+      "The folder you are currently in",
+      ["The password of the current user", "The path of the Python interpreter", "The last command you ran"],
+      "It stands for print working directory."),
+    mc("s11", "shell", "everyday commands", "What does `cd ..` do?",
+      "Moves up to the parent folder",
+      ["Copies the current folder", "Lists hidden files", "Returns to the home folder"],
+      "`cd ~` goes home; `..` means the parent of the current folder."),
+    mc("s12", "shell", "everyday commands", "What does `mkdir -p a/b/c` do?",
+      "Creates the whole chain of folders, and does not complain if some already exist",
+      ["Creates only folder `c`, and fails if `a/b` is missing", "Deletes `a/b/c` if it exists", "Creates a file named `a`"]),
+    mc("s13", "shell", "everyday commands", "What does `touch data/raw/.gitkeep` do?",
+      "Creates an empty file if it does not exist (so Git has a file to track in that folder)",
+      ["Touches up the Git history", "Deletes the file", "Makes the file read-only"],
+      "Git tracks files, not folders, so an empty placeholder keeps the folder in the repo."),
+    mc("s14", "shell", "everyday commands", "What does `rm -r folder` do, and why is it risky?",
+      "It deletes the folder and everything inside it, with no recycle bin",
+      ["It renames the folder", "It moves the folder to the trash", "It only deletes empty folders"],
+      "Check the path before pressing Enter. `rm -rf` also skips the confirmations."),
+    mc("s15", "shell", "everyday commands", "What does the pipe in `cat file | grep uv` do?",
+      "It sends the output of `cat` into `grep`, which prints only the matching lines",
+      ["It runs the two commands unconnected, at the same time", "It writes the output into a file named `grep`", "It runs `grep` as administrator"]),
+    cmd("k1", "shell", "everyday commands", "Type the command that prints the folder you are in.", ["pwd"]),
+    cmd("k3", "shell", "everyday commands", "Type the command that creates `~/projects`, with no error if it already exists.", ["mkdir -p ~/projects", "mkdir -p $HOME/projects"]),
+    mc("s6", "shell", "permissions & sudo", "Why does `apt install` need `sudo` while creating a venv does not?",
+      "`apt` writes to system-wide folders owned by root and shared by every user; a venv writes to your own folders",
+      ["`apt` downloads more data", "Venvs are not real software", "`sudo` makes commands run faster"],
+      "Use `sudo` only when you understand what the command does. If something asks for `sudo pip install`, stop."),
+    mc("s24", "shell", "permissions & sudo", "When is `sudo` appropriate?",
+      "When you must change system-wide files or install system software, and you understand the command",
+      ["Whenever a command prints an error", "For every command, to be safe", "When you want a command to run faster"]),
+    mc("s29", "shell", "permissions & sudo", "An install guide tells you to run `sudo pip install somepackage`. What should you do?",
+      "Stop: install into a project virtual environment instead (for example with `uv add`)",
+      ["Run it, `sudo` makes it safer", "Run it with `sudo -f` to force it", "Reinstall Ubuntu first"],
+      "`sudo pip` writes into the system Python, which the OS depends on."),
+    mc("s22", "shell", "apt", "What does `sudo apt update` do?",
+      "Refreshes the list of available software and versions; it installs nothing",
+      ["Upgrades every installed package", "Updates Ubuntu to a new release", "Updates your Python packages"]),
+    mc("s30", "shell", "apt", "Why run `sudo apt update` before installing software with `apt`?",
+      "To refresh the package list, so you install current versions and apt knows what exists",
+      ["To delete old packages", "To upgrade Ubuntu to a new release", "Because `apt install` fails without administrator mode"]),
+    mc("s23", "shell", "apt", "What is the difference between `apt upgrade` and `apt full-upgrade`?",
+      "`upgrade` installs newer versions only, never adding or removing other packages; `full-upgrade` may install or remove packages when that is needed to finish the upgrade",
+      ["`upgrade` updates the kernel only", "`full-upgrade` also updates Windows", "There is no difference"],
+      "The manual page (`man apt`) describes both."),
+    mc("s25", "shell", "hidden files & dotfiles", "Which file runs every time a new Bash terminal starts?",
+      "`~/.bashrc`",
+      ["`~/.gitignore`", "`/etc/hosts`", "`~/projects/.env`"],
+      "The `uv` installer added a line there so new terminals can find `uv`."),
+    rec("s9", "shell", "hidden files & dotfiles", "What are files whose names start with `.`, and how do you list them?",
+      "Hidden files, mostly configuration. `ls -a` lists them. For example `.bashrc` runs every time a shell starts, and `.gitignore` configures Git."),
+    cmd("k2", "shell", "hidden files & dotfiles", "Type the command that lists all files in the current folder, including hidden ones.", ["ls -a", "ls -la", "ls -al", "ls -A", "ls -lA"]),
 
-    /* ---- Git & GitHub ---- */
-    { id: "g1", t: "git", q: "What does `git add` do?",
-      a: "It puts changes into the staging area, marking what goes into the next commit",
-      w: ["It uploads your commits to GitHub", "It creates a commit", "It downloads new commits"],
-      x: "Keeping `add` and `commit` separate lets you commit only the changes that belong together." },
-    { id: "g2", t: "git", q: "What is the difference between `git fetch` and `git pull`?",
-      a: "`fetch` downloads new commits without touching your files; `pull` is fetch plus a merge into your current branch",
-      w: ["`pull` only works on `main`", "`fetch` uploads and `pull` downloads", "They are identical"],
-      x: "Use `fetch` first when you want to see what changed before merging." },
-    { id: "g3", t: "git", m: true, q: "After `git pull` added a `.gitignore`, `git status` still listed `src/` as untracked. Why?",
-      a: "`.gitignore` lists what to ignore; `src/` was not listed, so it is untracked (new), not ignored",
-      w: ["`src/` was listed in `.gitignore`", "Git cannot track folders named `src`", "The pull failed"],
-      x: "Files are tracked, untracked or ignored. `git check-ignore -v <path>` shows which rule matches." },
-    { id: "g4", t: "git", m: true, q: "You ran `git add file`, then a hook rewrote `file`. What does `git status` show?",
-      a: "The file appears twice: staged (the old snapshot) and modified-not-staged (the new version); you must `git add` it again",
-      w: ["Nothing, the hook's change is staged automatically", "An error saying the file is corrupted", "The file is deleted from the index"],
-      x: "Staging takes a snapshot at the moment you run `git add`. Later edits are not part of it." },
-    { id: "g5", t: "git", m: true, q: "You committed on `main` by mistake and have not pushed. What is the clean fix?",
-      a: "`git switch -c new-branch` to label your commit, then `git branch -f main origin/main` to move `main` back",
-      w: ["`git reset --hard HEAD~1`, which discards the commit", "Delete the repo and clone again", "`git push --force` to `main`"],
-      x: "A branch is just a label on a commit. Create the new label, then move the old one back. The commit survives on the new branch." },
-    { id: "g6", t: "git", q: "`git pull` printed \"Fast-forward\". What does that mean?",
-      a: "Your branch had no commits of its own, so Git just moved the pointer forward, with no merge commit",
-      w: ["A conflict was resolved automatically", "The pull was skipped", "Your commits were rewritten"],
-      x: "It is the simplest kind of merge: nothing diverged." },
-    { id: "g7", t: "git", q: "After a squash-merged pull request, `git branch -d feature` refuses to delete the branch. Why?",
-      a: "Only one squashed commit reached `main`, so Git cannot tell the branch is merged; `-D` forces the deletion",
-      w: ["The branch is locked on GitHub", "`-d` only works on `main`", "The branch has uncommitted changes"],
-      x: "Use `-D` only when you are sure the work is merged. On an unmerged branch it can lose work." },
-    { id: "g8", t: "git", q: "Why open a pull request instead of pushing straight to `main`?",
-      a: "It gets review and automated checks (CI) before the change joins `main`, which stays stable",
-      w: ["Pull requests make Git faster", "GitHub forbids pushing to `main`", "It deletes the branch automatically"],
-      x: "A pull request is a GitHub feature, not a Git command." },
-    { id: "g9", t: "git", q: "Which SSH key file do you paste into GitHub?",
-      a: "The public key (`.pub`); the private key never leaves your machine",
-      w: ["The private key", "Both keys", "Neither, GitHub generates its own"],
-      x: "The passphrase protects the private key file if someone copies it." },
-    { id: "g10", t: "git", q: "`error: src refspec phase-0-tooling does not match any` on `git push` means:",
-      a: "There is no local branch with that name (it was never created)",
-      w: ["GitHub is down", "Your SSH key expired", "The branch is protected"],
-      x: "Check with `git branch` before pushing." },
-    { id: "g11", t: "git", q: "You have uncommitted changes and run `git switch -c new-branch`. What happens to them?",
-      a: "They come along: uncommitted changes are not tied to a branch",
-      w: ["They are discarded", "Git refuses to switch", "They are committed automatically"],
-      x: "Only commits belong to branches. Changes in the working folder stay put." },
-    { id: "g12", t: "git", r: true, q: "Name the four places your work can be in Git and the command that moves it from one to the next.",
-      a: "Working folder, then (`add`) staging area, then (`commit`) local repository, then (`push`) remote on GitHub. `fetch` and `pull` bring remote commits back." },
+    /* ================= Git & GitHub ================= */
+    mc("g1", "git", "the four places", "What does `git add` do?",
+      "It puts changes into the staging area, marking what goes into the next commit",
+      ["It uploads your commits to GitHub", "It creates a commit", "It downloads new commits"],
+      "Keeping `add` and `commit` separate lets you commit only the changes that belong together."),
+    mc("g17", "git", "the four places", "What does `git status` tell you?",
+      "The branch you are on, what is staged, what is modified but not staged, and which files are untracked",
+      ["Only the state of the remote", "Which commits are not pushed, as a diff", "How many branches exist"]),
+    mc("g19", "git", "the four places", "What does `git commit -m \"message\"` need before it can create a commit?",
+      "Something in the staging area",
+      ["A connection to GitHub", "A new branch", "A passing CI run"]),
+    mc("g18", "git", "the four places", "What does `git restore --staged <file>` do?",
+      "Unstages the file, keeping your changes in the working folder",
+      ["Deletes your changes", "Restores the file from GitHub", "Creates a commit"]),
+    mc("g4", "git", "the four places", "You ran `git add file`, then a hook rewrote `file`. What does `git status` show?",
+      "The file appears twice: staged (the old snapshot) and modified-not-staged (the new version); you must `git add` it again",
+      ["Nothing, the hook's change is staged automatically", "An error saying the file is corrupted", "The file is deleted from the index"],
+      "Staging takes a snapshot at the moment you run `git add`. Later edits are not part of it.", true),
+    rec("g12", "git", "the four places", "Name the four places your work can be in Git and the command that moves it from one to the next.",
+      "Working folder, then (`add`) staging area, then (`commit`) local repository, then (`push`) remote on GitHub. `fetch` and `pull` bring remote commits back."),
+    cmd("k10", "git", "the four places", "Type the command that stages everything inside the `.github` folder.", ["git add .github", "git add .github/"]),
+    cmd("k19", "git", "the four places", "Type the command that unstages `notes.md` but keeps your changes.", ["git restore --staged notes.md"]),
+    mc("g20", "git", "branches", "What does `git switch -c phase-1` do?",
+      "Creates the branch `phase-1` at the current commit and switches to it",
+      ["Deletes `phase-1`", "Switches to an existing `phase-1`, failing if it does not exist", "Merges `phase-1` into `main`"]),
+    mc("g11", "git", "branches", "You have uncommitted changes and run `git switch -c new-branch`. What happens to them?",
+      "They come along: uncommitted changes are not tied to a branch",
+      ["They are discarded", "Git refuses to switch", "They are committed automatically"],
+      "Only commits belong to branches. Changes in the working folder stay put."),
+    mc("g5", "git", "branches", "You committed on `main` by mistake and have not pushed. What is the clean fix?",
+      "`git switch -c new-branch` to label your commit, then `git branch -f main origin/main` to move `main` back",
+      ["`git reset --hard HEAD~1`, which discards the commit", "Delete the repo and clone again", "`git push --force` to `main`"],
+      "A branch is just a label on a commit. Create the new label, then move the old one back. The commit survives on the new branch.", true),
+    mc("g38", "git", "branches", "What does `git branch -f main origin/main` do?",
+      "Moves the `main` label to where `origin/main` points",
+      ["Pushes `main` to GitHub", "Deletes `origin/main`", "Merges `origin/main` into the current branch"]),
+    mc("g21", "git", "branches", "What is `HEAD`?",
+      "A pointer to the commit (usually through the branch) you currently have checked out",
+      ["The newest commit on GitHub", "A special remote", "The first commit of the repo"]),
+    mc("g22", "git", "branches", "Why delete a branch after its pull request is merged?",
+      "It is finished; the work lives on `main`, and old branches only add clutter and confusion",
+      ["Git stops working with many branches", "GitHub charges per branch", "Merged branches break CI"]),
+    cmd("k7", "git", "branches", "Type the command that creates a branch called `phase-1` and switches to it.", ["git switch -c phase-1", "git checkout -b phase-1"]),
+    cmd("k11", "git", "branches", "Type the command that force-deletes the local branch `old`.", ["git branch -D old"], "Capital `-D` forces the deletion even if Git thinks the branch is unmerged."),
+    ord("o1", "git", "branches", "Put these steps in order for fixing an accidental commit on `main` (not pushed).",
+      ["`git switch -c fix-branch` to label your commit", "`git branch -f main origin/main` to move `main` back", "`git push -u origin fix-branch`", "Open a pull request on GitHub"]),
+    mc("g2", "git", "remotes & syncing", "What is the difference between `git fetch` and `git pull`?",
+      "`fetch` downloads new commits without touching your files; `pull` is fetch plus a merge into your current branch",
+      ["`pull` only works on `main`", "`fetch` uploads and `pull` downloads", "They are identical"],
+      "Use `fetch` first when you want to see what changed before merging."),
+    mc("g6", "git", "remotes & syncing", "`git pull` printed \"Fast-forward\". What does that mean?",
+      "Your branch had no commits of its own, so Git just moved the pointer forward, with no merge commit",
+      ["A conflict was resolved automatically", "The pull was skipped", "Your commits were rewritten"],
+      "It is the simplest kind of merge: nothing diverged."),
+    mc("g23", "git", "remotes & syncing", "What is `origin`?",
+      "The default name Git gives the remote you cloned from",
+      ["The first commit in the repo", "Your local `main` branch", "A GitHub setting"]),
+    mc("g24", "git", "remotes & syncing", "What does `git push -u origin my-branch` do beyond uploading?",
+      "Sets `origin/my-branch` as the branch's upstream, so later `git push` and `git pull` need no arguments",
+      ["Forces the push", "Deletes the local branch", "Creates a pull request"]),
+    mc("g25", "git", "remotes & syncing", "What does `git clone <url>` create?",
+      "A full local copy of the repository, including its history, in a new folder",
+      ["A new empty repo linked to nothing", "A fork on GitHub", "Only the files of the latest commit, with no history"]),
+    mc("g26", "git", "remotes & syncing", "Your local `main` says \"up to date with 'origin/main'\", but GitHub has newer commits. Why?",
+      "Git compares against its last known copy of the remote; run `git fetch` or `git pull` to update it",
+      ["Git checks GitHub live on every status", "The remote is broken", "Your branch is protected"]),
+    cmd("k13", "git", "remotes & syncing", "Type the command that downloads new commits from GitHub without changing your files.", ["git fetch", "git fetch origin"]),
+    cmd("k20", "git", "remotes & syncing", "Type the command that pushes the branch `phase-1` and sets its upstream.", ["git push -u origin phase-1", "git push --set-upstream origin phase-1"]),
+    mc("g8", "git", "merging & PRs", "Why open a pull request instead of pushing straight to `main`?",
+      "It gets review and automated checks (CI) before the change joins `main`, which stays stable",
+      ["Pull requests make Git faster", "GitHub forbids pushing to `main`", "It deletes the branch automatically"],
+      "A pull request is a GitHub feature, not a Git command."),
+    mc("g27", "git", "merging & PRs", "What are the three common ways to merge a pull request on GitHub?",
+      "Merge commit, squash and merge, rebase and merge",
+      ["Fast, slow and manual", "Push, pull and fetch", "Fork, clone and star"]),
+    mc("g28", "git", "merging & PRs", "What does squash and merge do?",
+      "Combines all of the branch's commits into one new commit on `main`",
+      ["Deletes the branch's commits from GitHub", "Rewrites `main`'s history", "Merges without creating any commit"]),
+    mc("g7", "git", "merging & PRs", "After a squash-merged pull request, `git branch -d feature` refuses to delete the branch. Why?",
+      "Only one squashed commit reached `main`, so Git cannot tell the branch is merged; `-D` forces the deletion",
+      ["The branch is locked on GitHub", "`-d` only works on `main`", "The branch has uncommitted changes"],
+      "Use `-D` only when you are sure the work is merged. On an unmerged branch it can lose work."),
+    mc("g29", "git", "merging & PRs", "When can a merge conflict happen?",
+      "When both branches changed the same lines of the same file and Git cannot choose",
+      ["Whenever two branches exist", "When a branch is older than a week", "When the commit message is too long"],
+      "You edit the file, keep the right lines, remove the conflict markers, then add and commit."),
+    ord("o3", "git", "merging & PRs", "Put these steps in order for a normal change.",
+      ["Create a branch", "Edit files", "`git add` and `git commit`", "`git push -u origin <branch>`", "Open a pull request and wait for CI", "Merge the pull request"]),
+    mc("g3", "git", ".gitignore", "After `git pull` added a `.gitignore`, `git status` still listed `src/` as untracked. Why?",
+      "`.gitignore` lists what to ignore; `src/` was not listed, so it is untracked (new), not ignored",
+      ["`src/` was listed in `.gitignore`", "Git cannot track folders named `src`", "The pull failed"],
+      "Files are tracked, untracked or ignored. `git check-ignore -v <path>` shows which rule matches.", true),
+    mc("g30", "git", ".gitignore", "What does the pattern `data/*/*` in `.gitignore` match?",
+      "Everything two levels below `data/`, for example `data/raw/file.csv`",
+      ["Only the folder `data/`", "Only files directly inside `data/`", "Every file in the repo"]),
+    mc("g31", "git", ".gitignore", "What does a line starting with `!` do in `.gitignore`?",
+      "It makes an exception: matching files are not ignored even if an earlier pattern ignored them",
+      ["It deletes the file", "It comments out the line", "It marks the file secret"]),
+    mc("g32", "git", ".gitignore", "Why is `.env` in `.gitignore`?",
+      "It holds secrets such as API keys, which must never be committed",
+      ["It is too large for Git", "It changes every minute", "Git cannot read it"],
+      "Commit a `.env.example` with fake values instead."),
+    mc("g33", "git", ".gitignore", "A file is already tracked and you add it to `.gitignore`. What happens?",
+      "Git keeps tracking it; `.gitignore` only affects untracked files (use `git rm --cached` to stop tracking)",
+      ["Git deletes it", "Git stops tracking it immediately", "Git refuses all commits"]),
+    cmd("k9", "git", ".gitignore", "Type the command that shows which `.gitignore` rule matches `data/raw/a.csv`.", ["git check-ignore -v data/raw/a.csv"]),
+    mc("g9", "git", "SSH & auth", "Which SSH key file do you paste into GitHub?",
+      "The public key (`.pub`); the private key never leaves your machine",
+      ["The private key", "Both keys", "Neither, GitHub generates its own"],
+      "The passphrase protects the private key file if someone copies it."),
+    mc("g34", "git", "SSH & auth", "What does the passphrase you type on `git push` protect?",
+      "Your private SSH key file, in case someone copies it",
+      ["Your GitHub account password", "The repository", "The commit messages"]),
+    mc("g35", "git", "SSH & auth", "What does `ssh -T git@github.com` check?",
+      "That GitHub accepts your SSH key; it does not open a shell",
+      ["Whether GitHub is down", "That your repo exists", "That Git is installed"]),
+    mc("g13", "git", "history & inspection", "What does `git log --oneline` show?",
+      "The commit history with one short line per commit (hash and message)",
+      ["Only the latest commit's files", "The list of branches", "Uncommitted changes"]),
+    mc("g14", "git", "history & inspection", "What does `git diff` with no arguments show?",
+      "Changes in your working folder that are not staged yet",
+      ["Differences between two branches", "The commit history", "Staged changes only"],
+      "`git diff --staged` shows the staged changes."),
+    mc("g15", "git", "history & inspection", "What does the `*` mean in the output of `git branch`?",
+      "The branch you currently have checked out",
+      ["The branch is merged", "The branch is protected", "The branch has conflicts"]),
+    mc("g16", "git", "history & inspection", "What does `git branch -vv` add to the plain list?",
+      "The latest commit of each branch and which remote branch it tracks (with ahead/behind counts)",
+      ["Verbose diffs of every file", "Branches of other people only", "Deleted branches"]),
+    mc("g36", "git", "history & inspection", "What is a Git tag?",
+      "A fixed name for a specific commit, often a release such as `v7.0.1`",
+      ["A moving pointer like a branch", "A comment on a commit", "A kind of remote"],
+      "`git ls-remote --tags <url>` lists a remote's tags, which is how you verified action versions."),
+    cmd("k8", "git", "history & inspection", "Type the command that shows the commit history, one line per commit.", ["git log --oneline"]),
+    cmd("k12", "git", "history & inspection", "Type the command that shows changes in your working folder that are not staged.", ["git diff"]),
+    mc("g39", "git", "reading errors", "`git status` prints \"nothing to commit, working tree clean\". What does it mean?",
+      "There are no staged, modified or untracked changes in the working folder",
+      ["Your commits were pushed to GitHub", "Git found no repository", "You are on the wrong branch"],
+      "It says nothing about whether your commits are pushed. Look at the line above it (\"up to date with origin/main\")."),
+    mc("g10", "git", "reading errors", "`error: src refspec phase-0-tooling does not match any` on `git push` means:",
+      "There is no local branch with that name (it was never created)",
+      ["GitHub is down", "Your SSH key expired", "The branch is protected"],
+      "Check with `git branch` before pushing.", true),
+    mc("g37", "git", "reading errors", "`fatal: pathspec 'pyprojects.toml' did not match any files` means:",
+      "No file with that name exists; check the spelling",
+      ["Git is not installed", "The file is ignored", "The file is too large"],
+      "", true),
 
-    /* ---- Testing & code quality ---- */
-    { id: "t1", t: "test", q: "How does pytest find your tests?",
-      a: "In files named `test_*.py`, in functions named `test_*`",
-      w: ["Every `.py` file in the project", "Only files inside `src/`", "Functions decorated with `@test`"],
-      x: "Discovery is by naming convention, so a misnamed file is silently never run." },
-    { id: "t2", t: "test", q: "A test calls `main()` but has no `assert`. What does it prove?",
-      a: "Only that nothing raised an error (a smoke test), not that the output is right",
-      w: ["That the output is correct", "That the function returns `None`", "Nothing, pytest ignores such tests"],
-      x: "Add an `assert` on a result you can name, such as printed text." },
-    { id: "t3", t: "test", q: "What does the `capsys` fixture do?",
-      a: "It captures what your code prints so you can assert on it; you request it by naming it as a test parameter",
-      w: ["It measures how long a test takes", "It captures screenshots", "It mocks the network"],
-      x: "`capsys.readouterr().out` holds the printed text, and `print` adds a trailing `\\n`." },
-    { id: "t4", t: "test", q: "pytest shows `assert 'Hello\\n' == 'Hello'`. Which side is the actual value?",
-      a: "The left side is the actual value, the right side is the expected one",
-      w: ["The right side is the actual value", "Both sides are expected", "The longer one is the actual value"],
-      x: "Here the code printed a newline that the expected text lacked." },
-    { id: "t5", t: "test", q: "What is the difference between `ruff check` and `ruff format`?",
-      a: "`check` finds likely bugs and style problems (like an unused import); `format` rewrites layout",
-      w: ["`check` rewrites files and `format` only reports", "They run the same rules", "`format` runs the tests"],
-      x: "`--check` makes `ruff format` report without changing files; `--diff` shows what would change." },
-    { id: "t6", t: "test", q: "A diff shows `\\ No newline at end of file`. What does it mean?",
-      a: "The last line of the file lacks a trailing newline character",
-      w: ["The file is empty", "The file has Windows line endings", "Git lost part of the file"],
-      x: "Text files should end with a newline. The `end-of-file-fixer` hook adds it, and VS Code can too with \"insert final newline\"." },
+    /* ================= Testing & code quality ================= */
+    mc("t1", "test", "pytest basics", "How does pytest find your tests?",
+      "In files named `test_*.py`, in functions named `test_*`",
+      ["Every `.py` file in the project", "Only files inside `src/`", "Functions decorated with `@test`"],
+      "Discovery is by naming convention, so a misnamed file is silently never run."),
+    mc("t7", "test", "pytest basics", "What does `uv run pytest` print when no tests exist?",
+      "\"collected 0 items\" (and a non-zero exit code)",
+      ["All tests passed", "An error about Python", "It creates an example test"],
+      "pytest exits with code 5 when it collects nothing."),
+    mc("t8", "test", "pytest basics", "Where do the tests live in this project?",
+      "In `tests/`, outside the `src/` package",
+      ["Inside `src/reviewradar/`", "In `data/`", "In `.github/`"],
+      "Tests are not shipped with the package. `tests/` will mirror the structure of `src/`."),
+    mc("t17", "test", "pytest basics", "What does `uv run pytest -v` add?",
+      "Verbose output: one line per test with its name and result",
+      ["It runs tests in parallel", "It validates the code", "It runs every test twice"]),
+    cmd("k21", "test", "pytest basics", "Type the command that runs pytest and prints one line per test.", ["uv run pytest -v"]),
+    mc("t2", "test", "assertions & fixtures", "A test calls `main()` but has no `assert`. What does it prove?",
+      "Only that nothing raised an error (a smoke test), not that the output is right",
+      ["That the output is correct", "That the function returns `None`", "Nothing, pytest ignores such tests"],
+      "Add an `assert` on a result you can name, such as printed text."),
+    mc("t9", "test", "assertions & fixtures", "Why add an `assert` on a specific expected value instead of only calling the function?",
+      "A bare call only proves it does not crash; the assert proves the result is right",
+      ["`assert` makes tests run faster", "pytest requires one assert per file", "Calls without asserts are not allowed"]),
+    mc("t3", "test", "assertions & fixtures", "What does the `capsys` fixture do?",
+      "It captures what your code prints so you can assert on it; you request it by naming it as a test parameter",
+      ["It measures how long a test takes", "It captures screenshots", "It mocks the network"],
+      "`capsys.readouterr().out` holds the printed text, and `print` adds a trailing `\\n`."),
+    mc("t10", "test", "assertions & fixtures", "What is a pytest fixture?",
+      "A helper or setup that pytest provides to a test when the test names it as a parameter",
+      ["A broken test", "A kind of assertion", "A test that runs in CI only"]),
+    mc("t4", "test", "assertions & fixtures", "pytest shows `assert 'Hello\\n' == 'Hello'`. Which side is the actual value?",
+      "The left side is the actual value, the right side is the expected one",
+      ["The right side is the actual value", "Both sides are expected", "The longer one is the actual value"],
+      "Here the code printed a newline that the expected text lacked."),
+    mc("t11", "test", "assertions & fixtures", "A test passes on your machine but fails in CI. What is a likely first thing to compare?",
+      "Versions and environment: Python, locked dependencies, and files that exist only locally",
+      ["The colour of the terminal", "The length of the commit message", "The GitHub username"]),
+    mc("t5", "test", "lint & format (ruff)", "What is the difference between `ruff check` and `ruff format`?",
+      "`check` finds likely bugs and style problems (like an unused import); `format` rewrites layout",
+      ["`check` rewrites files and `format` only reports", "They run the same rules", "`format` runs the tests"],
+      "`--check` makes `ruff format` report without changing files; `--diff` shows what would change."),
+    mc("t12", "test", "lint & format (ruff)", "Ruff reports `F401 os imported but unused`. What should you do?",
+      "Remove the unused import (or use it)",
+      ["Ignore it, it is only style", "Rename the file", "Add another import"],
+      "`--fix` can remove it automatically, but reading the finding first teaches more."),
+    mc("t13", "test", "lint & format (ruff)", "Why does CI run `ruff format --check` instead of `ruff format`?",
+      "CI should report problems, not rewrite files that nobody will see or keep",
+      ["`format` is not installed in CI", "`--check` formats faster", "`format` needs administrator rights"]),
+    mc("t14", "test", "lint & format (ruff)", "What is the point of an automatic formatter?",
+      "One consistent layout, so reviews and diffs show real changes rather than style arguments",
+      ["It makes code run faster", "It finds security bugs", "It renames variables"]),
+    cmd("k22", "test", "lint & format (ruff)", "Type the command that shows what `ruff format` would change without changing files.", ["uv run ruff format --diff", "ruff format --diff"]),
+    mc("t6", "test", "files & conventions", "A diff shows `\\ No newline at end of file`. What does it mean?",
+      "The last line of the file lacks a trailing newline character",
+      ["The file is empty", "The file has Windows line endings", "Git lost part of the file"],
+      "Text files should end with a newline. The `end-of-file-fixer` hook adds it, and VS Code can too with \"insert final newline\"."),
+    mc("t16", "test", "files & conventions", "Why do text files end with a newline by convention?",
+      "Many Unix tools treat a line as ending with `\\n`, so a missing one causes odd diffs and warnings",
+      ["Files without it cannot be opened", "It saves disk space", "Python requires it"]),
+    mc("t15", "test", "files & conventions", "What does `-> None` in `def main() -> None:` say?",
+      "That the function returns nothing",
+      ["That it must be called with `None`", "That it never fails", "That it prints"]),
 
-    /* ---- pre-commit & CI ---- */
-    { id: "c1", t: "ci", q: "Why do the `.sample` files in `.git/hooks` do nothing?",
-      a: "Git runs a hook only if the file has the exact hook name, without `.sample`",
-      w: ["They are encrypted", "They only run on Windows", "They run only on `main`"],
-      x: "`pre-commit install` writes a real file named `pre-commit` into that folder." },
-    { id: "c2", t: "ci", m: true, q: "pre-commit reports \"files were modified by this hook\" and the commit is blocked. What now?",
-      a: "Run `git add` on the fixed files and commit again",
-      w: ["Use `git commit --no-verify`", "Reinstall pre-commit", "Nothing, the commit already succeeded"],
-      x: "The hook fixed your working file, but your staged snapshot is still the old one." },
-    { id: "c3", t: "ci", q: "`check yaml` shows \"(no files to check) Skipped\", though a YAML file exists. Why?",
-      a: "The file was untracked, and pre-commit only checks tracked or staged files",
-      w: ["YAML is not supported", "The hook is broken", "The file is too large"],
-      x: "Once the file was staged for a commit, the hook ran on it." },
-    { id: "c4", t: "ci", m: true, q: "Which line is a correct YAML list item?",
-      a: "- repo: https://github.com/astral-sh/ruff-pre-commit",
-      w: ["-repo: https://github.com/astral-sh/ruff-pre-commit", "repo: - https://github.com/astral-sh/ruff-pre-commit", "* repo: https://github.com/astral-sh/ruff-pre-commit"],
-      x: "A list item is a dash and a space. The other keys of that item (`rev`, `hooks`) line up under `repo`. Indent with spaces, never tabs." },
-    { id: "c5", t: "ci", m: true, q: "Which settings belong to the local pytest hook?",
-      a: "entry: uv run pytest\nlanguage: system\npass_filenames: false",
-      w: ["entry: uv run pytest\nlanguage: system\npass_filenames: []", "entry: ./scripts/pytest.sh\nlanguage: system\npass_filenames: true", "entry: pytest\nlanguage: python\npass_filenames: true"],
-      x: "`pass_filenames` is a boolean (`[]` is a list). `false` runs the whole suite instead of passing file names to pytest." },
-    { id: "c6", t: "ci", q: "A pre-commit hook passes. Why don't you see its output?",
-      a: "pre-commit hides the output of hooks that pass, unless they are set to verbose",
-      w: ["The hook did not run", "Output goes to a log file inside `.git`", "Passing hooks print only in CI"],
-      x: "\"Passed\" means it ran and exited with code 0." },
-    { id: "c7", t: "ci", q: "Why run the same checks in CI if pre-commit already runs them locally?",
-      a: "pre-commit can be skipped or never installed; CI runs on a clean machine for every pull request and cannot be bypassed",
-      w: ["CI is faster", "pre-commit cannot run tests", "GitHub requires two copies of every check"],
-      x: "Local hooks give fast feedback; CI is the guard nobody can skip." },
-    { id: "c8", t: "ci", q: "What must a CI job do before `uv sync --locked`?",
-      a: "Get the code (checkout) and install `uv`",
-      w: ["Install Python manually", "Run `git pull` on the runner", "Create a `.venv` by hand"],
-      x: "The runner starts empty. `uv` fetches the pinned Python by itself." },
-    { id: "c9", t: "ci", q: "`astral-sh/setup-uv@v10` fails but `@v10.2.0` works. What explains it?",
-      a: "That action publishes only exact version tags, with no floating major tag; check with `git ls-remote --tags <url>`",
-      w: ["The action was deleted", "Major versions are never allowed in workflows", "GitHub caches old tags"],
-      x: "`actions/checkout@v7` does have a floating major tag, so conventions differ per action." },
-    { id: "c10", t: "ci", q: "Why is the second CI run faster than the first?",
-      a: "The first run saved a cache of downloaded packages, and later runs restore it",
-      w: ["GitHub gives repeat runs faster machines", "The tests are skipped", "Hooks are disabled after the first run"],
-      x: "The log lines \"No GitHub Actions cache found\" and \"uv cache saved\" show it happening." },
-    { id: "c11", t: "ci", q: "Why might pytest move from a pre-commit hook to CI as the project grows?",
-      a: "Slow hooks tempt people to bypass them with `--no-verify`; CI can run slow checks without blocking every commit",
-      w: ["pytest cannot run inside hooks", "CI is cheaper than hooks", "Hooks cannot run Python"],
-      x: "Run fast checks on commit and slow ones in CI or on push." },
-    { id: "c12", t: "ci", r: true, q: "List the steps a clean CI machine needs, in order, to go from the repo to \"all checks passed\".",
-      a: "Get the code (checkout), install `uv`, `uv sync --locked`, then `uv run pre-commit run --all-files`, which runs the whitespace, end-of-file and YAML hooks, ruff check and format, and pytest." }
+    /* ================= pre-commit & CI ================= */
+    mc("c1", "ci", "git hooks & pre-commit", "Why do the `.sample` files in `.git/hooks` do nothing?",
+      "Git runs a hook only if the file has the exact hook name, without `.sample`",
+      ["They are encrypted", "They only run on Windows", "They run only on `main`"],
+      "`pre-commit install` writes a real file named `pre-commit` into that folder."),
+    mc("c13", "ci", "git hooks & pre-commit", "What does `pre-commit install` do?",
+      "Writes a `pre-commit` script into `.git/hooks/` so the hooks run on every `git commit`",
+      ["Runs the hooks once on all files", "Installs the tools into the system Python", "Creates the config file"]),
+    mc("c14", "ci", "git hooks & pre-commit", "What does `pre-commit run --all-files` do?",
+      "Runs the hooks on every tracked file now, not only on staged changes",
+      ["Commits all files", "Installs the hooks", "Deletes untracked files"]),
+    mc("c2", "ci", "git hooks & pre-commit", "pre-commit reports \"files were modified by this hook\" and the commit is blocked. What now?",
+      "Run `git add` on the fixed files and commit again",
+      ["Use `git commit --no-verify`", "Reinstall pre-commit", "Nothing, the commit already succeeded"],
+      "The hook fixed your working file, but your staged snapshot is still the old one.", true),
+    mc("c3", "ci", "git hooks & pre-commit", "`check yaml` shows \"(no files to check) Skipped\", though a YAML file exists. Why?",
+      "The file was untracked, and pre-commit only checks tracked or staged files",
+      ["YAML is not supported", "The hook is broken", "The file is too large"],
+      "Once the file was staged for a commit, the hook ran on it."),
+    mc("c15", "ci", "git hooks & pre-commit", "What does `git commit --no-verify` do, and why avoid it?",
+      "It skips the hooks, so unchecked code can be committed; CI will still catch it later",
+      ["It verifies the commit twice", "It signs the commit", "It skips CI on GitHub"]),
+    mc("c6", "ci", "git hooks & pre-commit", "A pre-commit hook passes. Why don't you see its output?",
+      "pre-commit hides the output of hooks that pass, unless they are set to verbose",
+      ["The hook did not run", "Output goes to a log file inside `.git`", "Passing hooks print only in CI"],
+      "\"Passed\" means it ran and exited with code 0."),
+    mc("c16", "ci", "git hooks & pre-commit", "Why do the ruff hooks run in the order check, then format?",
+      "A lint fix can leave code slightly misformatted, so the formatter runs last to tidy it",
+      ["Alphabetical order is required", "Format cannot run first", "Check is slower, so it goes first"]),
+    mc("c11", "ci", "git hooks & pre-commit", "Why might pytest move from a pre-commit hook to CI as the project grows?",
+      "Slow hooks tempt people to bypass them with `--no-verify`; CI can run slow checks without blocking every commit",
+      ["pytest cannot run inside hooks", "CI is cheaper than hooks", "Hooks cannot run Python"],
+      "Run fast checks on commit and slow ones in CI or on push."),
+    cmd("k17", "ci", "git hooks & pre-commit", "Type the command that runs every pre-commit hook on every file now.", ["uv run pre-commit run --all-files", "pre-commit run --all-files"]),
+    cmd("k18", "ci", "git hooks & pre-commit", "Type the command that installs the Git hook so pre-commit runs on each commit.", ["uv run pre-commit install", "pre-commit install"]),
+    ord("o4", "ci", "git hooks & pre-commit", "Put these in order for what happens when a hook modifies a file during `git commit`.",
+      ["The hook rewrites the file in your working folder", "The commit is blocked", "You run `git add` on the fixed file", "You run `git commit` again", "All hooks pass and the commit is created"]),
+    mc("c4", "ci", "pre-commit config (YAML)", "Which line is a correct YAML list item?",
+      "- repo: https://github.com/astral-sh/ruff-pre-commit",
+      ["-repo: https://github.com/astral-sh/ruff-pre-commit", "repo: - https://github.com/astral-sh/ruff-pre-commit", "* repo: https://github.com/astral-sh/ruff-pre-commit"],
+      "A list item is a dash and a space. The other keys of that item (`rev`, `hooks`) line up under `repo`. Indent with spaces, never tabs.", true),
+    mc("c5", "ci", "pre-commit config (YAML)", "Which settings belong to the local pytest hook?",
+      "entry: uv run pytest\nlanguage: system\npass_filenames: false",
+      ["entry: uv run pytest\nlanguage: system\npass_filenames: []", "entry: ./scripts/pytest.sh\nlanguage: system\npass_filenames: true", "entry: pytest\nlanguage: python\npass_filenames: true"],
+      "`pass_filenames` is a boolean (`[]` is a list). `false` runs the whole suite instead of passing file names to pytest.", true),
+    mc("c17", "ci", "pre-commit config (YAML)", "In `.pre-commit-config.yaml`, what does `rev` pin?",
+      "The version (tag) of the hook repository to use",
+      ["The revision number of your project", "The Python version", "The branch to commit to"]),
+    mc("c18", "ci", "pre-commit config (YAML)", "Which hooks come from the `pre-commit-hooks` repository in this project?",
+      "Trailing whitespace, end-of-file fixer, YAML check and large-file check",
+      ["Ruff linting and formatting", "Running pytest", "Installing `uv`"]),
+    mc("c19", "ci", "pre-commit config (YAML)", "What does `check-added-large-files` do with a 200 MB data file?",
+      "It rejects the commit (by default it blocks files over 500 KB); data belongs in the ignored `data/` folders",
+      ["It compresses the file", "It uploads the file to a data service", "Nothing, size is not checked"]),
+    mc("c20", "ci", "pre-commit config (YAML)", "Why is `repo: local` used for the pytest hook?",
+      "pytest is part of this project's own environment, not a separate hook repository",
+      ["Local repos run faster", "GitHub forbids remote hooks", "`rev` is not needed anywhere"]),
+    mc("c12", "ci", "CI vs local", "Why run the same checks in CI if pre-commit already runs them locally?",
+      "pre-commit can be skipped or never installed; CI runs on a clean machine for every pull request and cannot be bypassed",
+      ["CI is faster", "pre-commit cannot run tests", "GitHub requires two copies of every check"],
+      "Local hooks give fast feedback; CI is the guard nobody can skip."),
+    mc("c27", "ci", "CI vs local", "What does a green check on a pull request mean?",
+      "All configured CI jobs passed on that commit",
+      ["A teammate approved it", "The code has no bugs", "It is already merged"],
+      "Passing CI proves what the checks cover, nothing more."),
+    mc("c28", "ci", "CI vs local", "What does CI stand for, and what is its aim?",
+      "Continuous integration: automatically check every change so problems are found early",
+      ["Code inspection: a human reads every line", "Continuous installation of packages", "Central index of commits"]),
+    mc("c29", "ci", "CI vs local", "pre-commit passes on your laptop but CI fails on the same commit. What is a likely cause?",
+      "A difference between machines: tool versions, files not committed (like an updated lockfile), or the Python version",
+      ["CI uses a different Git", "Hooks never match CI", "The commit message is too long"]),
+    mc("c21", "ci", "GitHub Actions", "In a GitHub Actions workflow, what is a runner?",
+      "The fresh virtual machine GitHub starts to run a job",
+      ["The person who reviews code", "A Python process manager", "A kind of branch"]),
+    mc("c22", "ci", "GitHub Actions", "What is the difference between `uses:` and `run:` in a workflow step?",
+      "`uses:` runs a shared pre-built action; `run:` runs a shell command",
+      ["`uses:` runs on Windows and `run:` on Linux", "`run:` is for tests only", "They are identical"]),
+    mc("c23", "ci", "GitHub Actions", "What does `on: pull_request:` mean in a workflow?",
+      "Run the workflow when a pull request is opened or updated",
+      ["Run when someone comments", "Run every minute", "Run only when a pull request is merged"]),
+    mc("c24", "ci", "GitHub Actions", "Where do workflow files live?",
+      "In `.github/workflows/` in the repository",
+      ["In `docs/`", "In `.git/hooks/`", "In the repository's wiki"]),
+    mc("c25", "ci", "GitHub Actions", "What does `actions/checkout` do?",
+      "Copies your repository's code onto the runner",
+      ["Checks the code for bugs", "Switches branches on your laptop", "Deploys the code"]),
+    mc("c26", "ci", "GitHub Actions", "What does `runs-on: ubuntu-latest` choose?",
+      "The operating system image of the runner (a fresh Linux VM)",
+      ["Your laptop's Ubuntu version", "The Python version", "The branch name"]),
+    mc("c8", "ci", "GitHub Actions", "What must a CI job do before `uv sync --locked`?",
+      "Get the code (checkout) and install `uv`",
+      ["Install Python manually", "Run `git pull` on the runner", "Create a `.venv` by hand"],
+      "The runner starts empty. `uv` fetches the pinned Python by itself."),
+    mc("c9", "ci", "GitHub Actions", "`astral-sh/setup-uv@v10` fails but `@v10.2.0` works. What explains it?",
+      "That action publishes only exact version tags, with no floating major tag; check with `git ls-remote --tags <url>`",
+      ["The action was deleted", "Major versions are never allowed in workflows", "GitHub caches old tags"],
+      "`actions/checkout@v7` does have a floating major tag, so conventions differ per action."),
+    mc("c33", "ci", "GitHub Actions", "Why pin `version: \"0.12.21\"` for `uv` in the workflow?",
+      "So CI uses the same `uv` as your laptop, and tool updates cannot change results unexpectedly",
+      ["`uv` has no newer versions", "Older versions are faster", "GitHub requires a version"]),
+    rec("c32r", "ci", "GitHub Actions", "Describe in one or two sentences what your CI workflow does on every pull request.",
+      "On a fresh Ubuntu runner it checks out the code, installs a pinned `uv`, runs `uv sync --locked` to build the locked environment, then runs `uv run pre-commit run --all-files`: the whitespace, end-of-file and YAML hooks, ruff check and format, and pytest."),
+    ord("o2", "ci", "GitHub Actions", "Put the CI steps in order.",
+      ["Check out the code", "Install `uv`", "`uv sync --locked`", "`uv run pre-commit run --all-files`"]),
+    mc("c30", "ci", "lockfile in CI", "CI fails on `uv sync --locked` after you edited `pyproject.toml` but did not commit `uv.lock`. Why?",
+      "The lockfile no longer matches `pyproject.toml`, and `--locked` refuses to update it",
+      ["`uv` is not installed", "The lockfile is too large", "Python 3.12 is missing"]),
+    mc("c34", "ci", "lockfile in CI", "Why does CI use `uv sync --locked` and not plain `uv sync`?",
+      "So CI fails if the lockfile is stale, instead of silently installing different versions than the ones you committed",
+      ["Because `--locked` installs packages faster", "Because plain `uv sync` does not work on Linux", "Because `--locked` skips the dev dependencies"]),
+    mc("c35", "ci", "lockfile in CI", "Which two files must be committed together whenever you change dependencies?",
+      "`pyproject.toml` and `uv.lock`",
+      ["`.python-version` and `.gitignore`", "`README.md` and `CLAUDE.md`", "`pyproject.toml` and `.venv/`"],
+      "Committing one without the other leaves the lockfile stale, and CI's `--locked` step will fail."),
+    mc("c10", "ci", "caching & logs", "Why is the second CI run faster than the first?",
+      "The first run saved a cache of downloaded packages, and later runs restore it",
+      ["GitHub gives repeat runs faster machines", "The tests are skipped", "Hooks are disabled after the first run"],
+      "The log lines \"No GitHub Actions cache found\" and \"uv cache saved\" show it happening."),
+    mc("c32", "ci", "caching & logs", "What did `enable-cache: true` in `setup-uv` do?",
+      "Saved downloaded packages after the run so later runs restore them instead of downloading again",
+      ["Made the tests run in parallel", "Cached the test results", "Disabled network access"]),
+    mc("c31", "ci", "caching & logs", "In a CI log, where do you look first when a step is red?",
+      "At the output of the failing step, near its end, for the error message",
+      ["At the first line of the log", "At the repository README", "At the commit author"]),
+
+    /* ================= Project layout & habits ================= */
+    mc("p1", "proj", "folder layout", "Why does `data/` have `raw`, `interim` and `processed` subfolders?",
+      "Raw data is never edited, and everything downstream can be rebuilt from it",
+      ["GitHub requires three folders", "They hold the three branches", "They make `data/` read-only"]),
+    mc("p3", "proj", "folder layout", "What belongs in `notebooks/`, and what moves to `src/`?",
+      "Notebooks hold exploration; code that works and will be reused moves to `src/`, where it can be tested",
+      ["Everything stays in notebooks", "Tests go in notebooks", "Notebooks hold the final API"]),
+    mc("p4", "proj", "folder layout", "What is `configs/` for?",
+      "Settings such as hyperparameters and paths kept in files, so an experiment can be rerun by editing one file",
+      ["Git configuration", "Passwords", "Compiled code"]),
+    mc("p5", "proj", "folder layout", "What is `scripts/` for, compared with `src/`?",
+      "Thin command-line entry points that call code in `src/`, so the logic stays testable",
+      ["Tests", "Documentation", "Large data files"]),
+    mc("p6", "proj", "folder layout", "Why does `tests/` mirror the structure of `src/`?",
+      "So you always know where the test for a module lives",
+      ["pytest requires it", "It makes imports faster", "It hides tests from CI"]),
+    mc("p7", "proj", "folder layout", "Why use a `src/` layout?",
+      "It keeps the package separate from tooling files, and makes imports go through the installed package",
+      ["It makes Python faster", "Git requires it", "It hides the code from users"]),
+    mc("p9", "proj", "folder layout", "What does `.gitkeep` do, and what is special about its name?",
+      "It is an empty placeholder file so Git tracks an otherwise empty folder; the name is only a convention",
+      ["It is a Git command", "It locks the folder", "It hides files"]),
+    mc("p2", "proj", "data & models", "Why is `data/raw/` ignored by Git?",
+      "Datasets are large and reproducible; DVC will track them in Phase 1 instead",
+      ["Git cannot store CSV files", "Raw data contains secrets by definition", "It is only temporary"]),
+    mc("p8", "proj", "data & models", "Why are `models/*` and files like `*.pt` ignored by Git?",
+      "Trained model files are large and can be reproduced from code, data and config",
+      ["Git cannot read binary files", "They contain tests", "Models change names often"]),
+    mc("p18", "proj", "data & models", "Which tool will track large datasets in Phase 1, instead of Git?",
+      "DVC (Data Version Control), which keeps small pointer files in Git",
+      ["Docker", "pytest", "ruff"]),
+    mc("p10", "proj", "decisions", "Why was a separate repository created for ReviewRadar instead of using the profile repo?",
+      "The profile repo's README is the public profile page; the project needs its own code, CI and history",
+      ["Profile repos cannot hold code", "GitHub limits the number of files", "Separate repos are free and profile repos are not"]),
+    mc("p11", "proj", "decisions", "Why does the project keep a decision log (`DECISIONS.md`)?",
+      "To record why choices were made, so they are not re-argued and can be explained in interviews",
+      ["Git requires it", "CI reads it", "It speeds up builds"]),
+    mc("p12", "proj", "decisions", "Why does `CLAUDE.md` live in the repo?",
+      "Every Claude session, in the cloud or locally, reads it first, so project rules and mentor mode carry over",
+      ["GitHub displays it on the profile", "pytest needs it", "It lists dependencies"]),
+    mc("p17", "proj", "decisions", "Why does CI run `pre-commit` instead of repeating each check as its own step?",
+      "One config defines the checks for both your laptop and CI, so they cannot drift apart",
+      ["It is cheaper", "It avoids installing `uv`", "GitHub does not allow separate steps"]),
+    mc("p13", "proj", "workflow habits", "Before starting work in a repository, which quick checks avoid most mistakes?",
+      "`git branch` or `git status` (which branch am I on?) and the prompt (which shell am I in?)",
+      ["`git log` and `ls`", "`sudo` and `exit`", "`uv sync` and `uv lock`"]),
+    mc("p14", "proj", "workflow habits", "Why work on a branch and open a pull request even when you are the only developer?",
+      "CI runs before merging, `main` stays stable, and every change is a reviewable, revertible unit",
+      ["GitHub requires it", "It is faster", "It avoids writing commit messages"]),
+    mc("p15", "proj", "workflow habits", "What should you do when a command fails with an unfamiliar error?",
+      "Read the message: ask which program produced it and what line it points at, before changing anything",
+      ["Retry the command until it works", "Reinstall the tool", "Use `sudo` to force it"]),
+    mc("p16", "proj", "workflow habits", "Why keep a learning log in your own words?",
+      "Explaining something yourself shows what you really understood, and it makes interview preparation easy",
+      ["CI requires it", "It replaces tests", "It helps pre-commit run faster"])
   ];
 
   /* ---------------- helpers ---------------- */
@@ -396,7 +834,9 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
   QUESTIONS.forEach(function (q) { byId[q.id] = q; });
   var topicName = {};
   TOPICS.forEach(function (t) { topicName[t.k] = t.n; });
+  var KIND = { mc: "choose", recall: "recall", cmd: "type it", order: "order" };
 
+  function typeOf(q) { return q.cmd ? "cmd" : q.o ? "order" : q.r ? "recall" : "mc"; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function fmt(s) {
     if (s.indexOf("\n") >= 0) return '<pre class="blk">' + esc(s) + "</pre>";
@@ -410,14 +850,14 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
   function hash7(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(16).padStart(8, "0").slice(0, 7); }
 
   /* ---------------- progress + storage ---------------- */
-  var P = { v: 1, u: 0, items: {}, sessions: [] };
+  var P = { v: 1, u: 0, size: 10, items: {}, sessions: [] };
   var storage = "checking"; /* checking | account | browser | error */
   var dbDoc = null;
   var saveTimer = null;
   var writing = Promise.resolve();
 
   function normalize(o) {
-    var r = { v: 1, u: (o && o.u) || 0, items: {}, sessions: [] };
+    var r = { v: 1, u: (o && o.u) || 0, size: (o && [10, 20, 40].indexOf(o.size) >= 0) ? o.size : 10, items: {}, sessions: [] };
     if (o && o.items) Object.keys(o.items).forEach(function (id) { if (byId[id]) r.items[id] = o.items[id]; });
     if (o && Array.isArray(o.sessions)) r.sessions = o.sessions.slice(-60);
     return r;
@@ -460,6 +900,8 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
   function it(id) { return P.items[id] || { b: 0, d: "", s: 0, c: 0 }; }
   function isDue(id) { var r = it(id); return r.b > 0 && r.d <= today(); }
   function level(id) { var b = it(id).b; return b === 0 ? "new" : b <= 2 ? "learn" : b <= 4 ? "solid" : "master"; }
+  function size() { return P.size || 10; }
+  function allIds() { return QUESTIONS.map(function (q) { return q.id; }); }
 
   function pool(ids, n) {
     var t = today();
@@ -470,9 +912,17 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     return due.concat(fresh, later).slice(0, n);
   }
   function weakIds() {
-    return QUESTIONS.map(function (q) { return q.id; }).filter(function (id) {
+    return allIds().filter(function (id) {
       var r = it(id); return r.s > 0 && (r.b <= 1 || r.c / r.s < 0.6);
     }).sort(function (a, b) { return it(a).c / it(a).s - it(b).c / it(b).s; });
+  }
+  function sweepIds() { /* one question per subtopic, preferring the one you know least */
+    var groups = {};
+    QUESTIONS.forEach(function (q) { (groups[q.t + "/" + q.s] = groups[q.t + "/" + q.s] || []).push(q.id); });
+    return shuffle(Object.keys(groups).map(function (k) {
+      var g = shuffle(groups[k]).sort(function (a, b) { return it(a).b - it(b).b; });
+      return g[0];
+    }));
   }
   function streak() {
     var days = {};
@@ -490,7 +940,7 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 
   function startSession(label, ids) {
     if (!ids.length) return;
-    S = { label: label, queue: ids.map(function (id) { return { id: id, retry: false }; }), total: ids.length, i: 0, results: [], ans: null, revealed: false, answered: false, lastOk: false, opts: null };
+    S = { label: label, queue: ids.map(function (id) { return { id: id, retry: false }; }), total: ids.length, i: 0, results: [], ans: null, revealed: false, answered: false, lastOk: false, opts: null, items: null, picks: [], cmdVal: "" };
     prepare();
     view = "quiz";
     render();
@@ -498,8 +948,10 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
   }
   function prepare() {
     var q = byId[S.queue[S.i].id];
-    S.ans = null; S.revealed = false; S.answered = false; S.lastOk = false;
-    S.opts = q.r ? null : shuffle([{ t: q.a, ok: true }].concat(q.w.map(function (t) { return { t: t, ok: false }; })));
+    var ty = typeOf(q);
+    S.ans = null; S.revealed = false; S.answered = false; S.lastOk = false; S.opts = null; S.items = null; S.picks = []; S.cmdVal = "";
+    if (ty === "mc") S.opts = shuffle([{ t: q.a, ok: true }].concat(q.w.map(function (t) { return { t: t, ok: false }; })));
+    if (ty === "order") S.items = shuffle(q.o.map(function (t, i) { return { t: t, i: i }; }));
   }
   function record(id, ok) {
     var r = Object.assign({ b: 0, d: "", s: 0, c: 0 }, it(id));
@@ -523,6 +975,21 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     render();
   }
   function choose(i) { if (S.answered || !S.opts || !S.opts[i]) return; S.ans = i; answer(S.opts[i].ok); }
+  function normCmd(s) { return String(s).trim().replace(/^\$\s*/, "").replace(/\s+/g, " "); }
+  function checkCmd() {
+    var inp = document.getElementById("cmd-input");
+    if (!inp || S.answered) return;
+    var v = normCmd(inp.value);
+    if (!v) return;
+    S.cmdVal = inp.value;
+    var q = byId[S.queue[S.i].id];
+    answer(q.cmd.some(function (a) { return normCmd(a) === v; }));
+  }
+  function checkOrder() {
+    var q = byId[S.queue[S.i].id];
+    if (S.answered || S.picks.length !== q.o.length) return;
+    answer(S.picks.every(function (v, p) { return v === p; }));
+  }
   function next() {
     S.i += 1;
     if (S.i >= S.queue.length) { finish(); return; }
@@ -544,6 +1011,7 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 
   /* ---------------- rendering ---------------- */
   var app = document.getElementById("app");
+  var resetArmed = false;
 
   function statusText() {
     return storage === "account" ? ["Progress saved to your account", "ok"]
@@ -558,63 +1026,76 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     el.textContent = s[0];
     el.className = "chip " + s[1];
   }
-
   function header() {
     var s = statusText();
     return '<div class="top"><span class="crumb">reviewradar / phase-0 / quiz</span><span id="status" class="chip ' + s[1] + '">' + esc(s[0]) + "</span></div>";
   }
+  function answerHTML(q) {
+    var ty = typeOf(q);
+    if (ty === "cmd") return '<pre class="blk">' + esc(q.cmd[0]) + "</pre>";
+    if (ty === "order") return '<ol class="seq">' + q.o.map(function (t) { return "<li>" + fmt(t) + "</li>"; }).join("") + "</ol>";
+    return fmt(q.a);
+  }
 
   function renderHome() {
-    var ids = QUESTIONS.map(function (q) { return q.id; });
+    var ids = allIds();
     var due = ids.filter(isDue).length;
     var fresh = ids.filter(function (id) { return it(id).b === 0; }).length;
     var solid = ids.filter(function (id) { return it(id).b >= 4; }).length;
-    var daily = pool(ids, 10);
+    var n = size();
+    var daily = pool(ids, n);
     var weak = weakIds();
-    var cta = due > 0 ? "Start today's session: " + daily.length + " questions (" + Math.min(due, 10) + " due)"
+    var sweep = sweepIds();
+    var cta = due > 0 ? "Start today's session: " + daily.length + " questions (" + Math.min(due, n) + " due)"
       : fresh > 0 ? "Start today's session: " + daily.length + " new questions"
       : "Nothing due. Practice " + daily.length + " anyway";
 
     var topics = TOPICS.map(function (t) {
-      var tid = ids.filter(function (id) { return byId[id].t === t.k; });
+      var tq = QUESTIONS.filter(function (q) { return q.t === t.k; });
+      var tid = tq.map(function (q) { return q.id; });
       var cnt = { "new": 0, learn: 0, solid: 0, master: 0 };
       tid.forEach(function (id) { cnt[level(id)]++; });
       var td = tid.filter(isDue).length;
+      var subs = [];
+      tq.forEach(function (q) { if (subs.indexOf(q.s) < 0) subs.push(q.s); });
       var seg = ["master", "solid", "learn", "new"].map(function (k) {
         return cnt[k] ? '<span class="s-' + k + '" style="flex:' + cnt[k] + '" title="' + k + ": " + cnt[k] + '"></span>' : "";
       }).join("");
       return '<div class="topic"><div><div class="name">' + esc(t.n) + '</div><div class="sub">' + tid.length + " questions, " + td + " due</div></div>" +
         '<div class="bar-wrap"><div class="bar" role="img" aria-label="' + cnt.master + " mastered, " + cnt.solid + " solid, " + cnt.learn + " learning, " + cnt["new"] + ' new">' + seg + "</div></div>" +
-        '<button class="btn small" data-a="topic" data-k="' + t.k + '">Practice</button></div>';
+        '<button class="btn small" data-a="topic" data-k="' + t.k + '">Practice</button>' +
+        '<div class="covers">Covers ' + subs.length + " areas: " + esc(subs.join(", ")) + "</div></div>";
     }).join("");
 
-    var log = P.sessions.length ? '<ol class="log" style="list-style:none">' + P.sessions.slice(-8).reverse().map(function (s) {
+    var log = P.sessions.length ? '<ol class="log">' + P.sessions.slice(-8).reverse().map(function (s) {
       var d = new Date(s.t).toLocaleDateString(undefined, { month: "short", day: "numeric" });
       var names = (s.k || []).map(function (k) { return topicName[k] || k; }).join(", ");
-      return '<li class="' + (s.c === s.n ? "perfect" : "") + '"><span class="h">' + hash7(s.t) + '</span><span class="d">' + esc(d) + "</span><span>" + s.c + "/" + s.n + '</span><span class="t">' + esc(s.l) + (names ? ": " + esc(names) : "") + "</span></li>";
+      return '<li class="' + (s.c === s.n ? "perfect" : "") + '"><span class="h">' + hash7(s.t) + '</span><span class="d">' + esc(d) + "</span><span>" + s.c + "/" + s.n + '</span><span class="t">' + esc(s.l) + (names && names !== s.l ? ": " + esc(names) : "") + "</span></li>";
     }).join("") + "</ol>"
       : '<div class="empty">No sessions yet. Each session you finish is added here like a commit: a short hash, the date, your score and the topics covered.</div>';
 
+    var sizes = [10, 20, 40].map(function (k) { return '<button class="btn small" data-a="size" data-n="' + k + '" aria-pressed="' + (n === k) + '">' + k + "</button>"; }).join("");
+
     return header() +
       "<h1>ReviewRadar Phase 0 Quiz</h1>" +
-      '<p class="lede">' + QUESTIONS.length + " questions on environments, the shell, Git, testing and CI. Missed questions come back sooner; ones you know come back after days, then weeks.</p>" +
+      '<p class="lede">' + QUESTIONS.length + " questions across " + TOPICS.length + " topics. Choose the answer, type the command, put steps in order, or recall it. Missed questions come back sooner; ones you know come back after days, then weeks.</p>" +
       '<div class="strip"><div><div class="n">' + due + '</div><div class="l">due today</div></div>' +
       '<div><div class="n">' + streak() + '<small> days</small></div><div class="l">current streak</div></div>' +
       '<div><div class="n">' + solid + "<small>/" + QUESTIONS.length + '</small></div><div class="l">solid or mastered</div></div></div>' +
       '<div class="row"><button class="btn primary" data-a="daily">' + esc(cta) + "</button>" +
-      '<button class="btn" data-a="weak"' + (weak.length ? "" : " disabled") + ">Weak spots (" + weak.length + ")</button>" +
-      '<button class="btn" data-a="full">Full run (' + QUESTIONS.length + ")</button></div>" +
+      '<button class="btn" data-a="sweep">Coverage sweep (' + sweep.length + ")</button>" +
+      '<button class="btn" data-a="weak"' + (weak.length ? "" : " disabled") + ">Weak spots (" + weak.length + ")</button></div>" +
+      '<div class="row sizes"><span>Questions per session</span>' + sizes + "</div>" +
       '<section class="block"><h2>Topics</h2><div class="legend"><span><i class="s-master"></i>mastered</span><span><i class="s-solid"></i>solid</span><span><i class="s-learn"></i>learning</span><span><i style="border:1px solid var(--line)"></i>new</span></div>' + topics + "</section>" +
       '<section class="block"><h2>Session log</h2>' + log + "</section>" +
-      '<div class="foot"><p>Questions come from <code>docs/QUIZ_SEED.md</code> in the repo, including the mistakes made during Phase 0. Progress is kept by question id, so adding questions later does not reset anything.</p>' +
+      '<div class="foot"><p>The coverage sweep asks one question from every area above, preferring the one you know least. Progress is kept by question id, so adding questions later does not reset anything.</p>' +
       '<span><button class="link danger" data-a="reset">' + (resetArmed ? "Click again to erase all progress" : "Reset progress") + "</button></span></div>";
   }
-
-  var resetArmed = false;
 
   function renderQuiz() {
     var cur = S.queue[S.i];
     var q = byId[cur.id];
+    var ty = typeOf(q);
     var ticks = "";
     for (var n = 0; n < S.total; n++) {
       var res = S.results[n];
@@ -622,17 +1103,40 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     }
     var label = cur.retry ? "Second try" : "Question " + (S.results.length + 1) + " of " + S.total;
     var body = "";
-    if (!q.r) {
+    var lastBtn = S.i + 1 >= S.queue.length ? "Finish" : "Next";
+    var nextBtn = '<div class="actions"><button class="btn primary" data-a="next">' + lastBtn + "</button></div>";
+    var expl = q.x ? "<p>" + fmt(q.x) + "</p>" : "";
+
+    if (ty === "mc") {
       body = '<div class="opts">' + S.opts.map(function (o, i) {
         var cls = "opt";
         if (S.answered) cls += o.ok ? " right" : i === S.ans ? " wrong" : " dim";
         return '<button class="' + cls + '" data-a="choose" data-i="' + i + '"' + (S.answered ? " disabled" : "") + '><span class="k">' + "ABCD"[i] + '</span><span class="tx">' + fmt(o.t) + "</span></button>";
       }).join("") + "</div>";
+      body += S.answered ? '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Correct" : "Not quite") + "</div>" + expl + "</div>" + nextBtn
+        : '<div class="hint">press 1 to 4 to answer</div>';
+    } else if (ty === "cmd") {
+      body = '<div class="cmdbox"><input id="cmd-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the command" placeholder="type the command" value="' + esc(S.cmdVal) + '"' + (S.answered ? " disabled" : "") + ">" +
+        (S.answered ? "" : '<button class="btn primary" data-a="cmdcheck">Check</button>') + "</div>";
       if (S.answered) {
-        body += '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Correct" : "Not quite") + "</div>" + (q.x ? "<p>" + fmt(q.x) + "</p>" : "") + "</div>" +
-          '<div class="actions"><button class="btn primary" data-a="next">' + (S.i + 1 >= S.queue.length ? "Finish" : "Next") + "</button></div>";
+        var also = q.cmd.length > 1 ? '<div class="l">Also accepted</div><pre class="blk">' + esc(q.cmd.slice(1).join("\n")) + "</pre>" : "";
+        body += '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Correct" : "Not quite") + "</div>" +
+          (S.lastOk ? "" : '<div class="exp"><div class="l">Expected</div>' + answerHTML(q) + "</div>") +
+          (S.lastOk && also ? '<div class="exp">' + also + "</div>" : "") + expl + "</div>" + nextBtn;
       } else {
-        body += '<div class="hint">press 1 to 4 to answer</div>';
+        body += '<div class="hint">type it exactly as you would in the terminal, then press Enter</div>';
+      }
+    } else if (ty === "order") {
+      body = '<p style="color:var(--muted);margin:0 0 12px">Tap the steps in the order they happen. Tap a numbered step to remove it.</p><div class="opts">' + S.items.map(function (o) {
+        var pos = S.picks.indexOf(o.i);
+        var cls = "opt" + (pos >= 0 && !S.answered ? " picked" : "") + (S.answered ? (S.picks[pos] === pos ? " right" : " wrong") : "");
+        return '<button class="' + cls + '" data-a="' + (pos >= 0 ? "unpick" : "pick") + '" data-i="' + o.i + '"' + (S.answered ? " disabled" : "") + '><span class="k">' + (pos >= 0 ? pos + 1 : "·") + '</span><span class="tx">' + fmt(o.t) + "</span></button>";
+      }).join("") + "</div>";
+      if (S.answered) {
+        body += '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Correct order" : "Not quite") + "</div>" +
+          (S.lastOk ? "" : '<div class="exp"><div class="l">Correct order</div>' + answerHTML(q) + "</div>") + expl + "</div>" + nextBtn;
+      } else {
+        body += '<div class="actions"><button class="btn primary" data-a="ordcheck"' + (S.picks.length === q.o.length ? "" : " disabled") + '>Check order</button><button class="btn" data-a="ordreset"' + (S.picks.length ? "" : " disabled") + ">Start over</button></div>";
       }
     } else {
       if (!S.revealed) {
@@ -640,23 +1144,23 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
       } else {
         body = '<div class="answerbox">' + fmt(q.a) + "</div>";
         if (!S.answered) body += '<div class="actions"><button class="btn primary" data-a="knew">I knew it</button><button class="btn" data-a="missed">I missed it</button></div>';
-        else body += '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Marked as known" : "Marked to review") + '</div></div><div class="actions"><button class="btn primary" data-a="next">' + (S.i + 1 >= S.queue.length ? "Finish" : "Next") + "</button></div>";
+        else body += '<div class="feedback ' + (S.lastOk ? "ok" : "no") + '"><div class="v">' + (S.lastOk ? "Marked as known" : "Marked to review") + "</div></div>" + nextBtn;
       }
     }
     return header() +
       '<div class="qhead"><button class="btn small" data-a="exit">Exit</button><span class="tag">' + esc(label) + " &middot; " + esc(S.label) + "</span></div>" +
       '<div class="ticks">' + ticks + "</div>" +
-      '<div class="card"><div class="tags"><span class="tag">' + esc(topicName[q.t]) + "</span>" + (q.m ? '<span class="pill">You hit this in Phase 0</span>' : "") + "</div>" +
+      '<div class="card"><div class="tags"><span class="tag">' + esc(topicName[q.t]) + " / " + esc(q.s) + '</span><span class="pill kind">' + KIND[ty] + "</span>" + (q.m ? '<span class="pill">You hit this in Phase 0</span>' : "") + "</div>" +
       '<h2 class="q">' + fmt(q.q) + "</h2>" + body + "</div>";
   }
 
   function renderSummary() {
     var c = S.results.filter(function (r) { return r.ok; }).length;
     var missed = S.results.filter(function (r) { return !r.ok; });
-    var msg = c === S.results.length ? "Clean sweep." : c / S.results.length >= 0.7 ? "Solid. The misses are below." : "These come back tomorrow. Read the answers once now.";
+    var msg = c === S.results.length ? "Clean sweep." : c / S.results.length >= 0.7 ? "Solid. The misses are below." : "These come back soon. Read the answers once now.";
     var list = missed.length ? '<ul class="missed">' + missed.map(function (r) {
       var q = byId[r.id];
-      return '<li><div class="mq">' + fmt(q.q) + '</div><div class="ma">' + fmt(q.a) + "</div></li>";
+      return '<li><div class="mq">' + fmt(q.q) + '</div><div class="ma">' + answerHTML(q) + "</div></li>";
     }).join("") + "</ul>" : "";
     return header() + "<h1>Session complete</h1>" +
       '<div class="score" style="margin-top:20px">' + c + "<small>/" + S.results.length + "</small></div>" +
@@ -667,6 +1171,10 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
 
   function render() {
     app.innerHTML = view === "quiz" ? renderQuiz() : view === "summary" ? renderSummary() : renderHome();
+    if (view === "quiz" && S && !S.answered && typeOf(byId[S.queue[S.i].id]) === "cmd") {
+      var inp = document.getElementById("cmd-input");
+      if (inp) inp.focus();
+    }
   }
 
   /* ---------------- events ---------------- */
@@ -674,13 +1182,19 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     var b = e.target.closest("[data-a]");
     if (!b) return;
     var a = b.getAttribute("data-a");
-    var ids = QUESTIONS.map(function (q) { return q.id; });
+    var ids = allIds();
     if (a !== "reset" && resetArmed) { resetArmed = false; }
-    if (a === "daily") startSession("Daily", pool(ids, 10));
-    else if (a === "weak") startSession("Weak spots", weakIds().slice(0, 10));
-    else if (a === "full") startSession("Full run", shuffle(ids));
-    else if (a === "topic") { var k = b.getAttribute("data-k"); startSession(topicName[k], pool(ids.filter(function (id) { return byId[id].t === k; }), 10)); }
+    if (a === "daily") startSession("Daily", pool(ids, size()));
+    else if (a === "sweep") startSession("Coverage sweep", sweepIds());
+    else if (a === "weak") startSession("Weak spots", weakIds().slice(0, size()));
+    else if (a === "topic") { var k = b.getAttribute("data-k"); startSession(topicName[k], pool(ids.filter(function (id) { return byId[id].t === k; }), size())); }
+    else if (a === "size") { P.size = Number(b.getAttribute("data-n")); save(); render(); }
     else if (a === "choose") choose(Number(b.getAttribute("data-i")));
+    else if (a === "cmdcheck") checkCmd();
+    else if (a === "pick") { var pi = Number(b.getAttribute("data-i")); if (!S.answered && S.picks.indexOf(pi) < 0) { S.picks.push(pi); render(); } }
+    else if (a === "unpick") { var ui = Number(b.getAttribute("data-i")); if (!S.answered) { S.picks = S.picks.filter(function (x) { return x !== ui; }); render(); } }
+    else if (a === "ordreset") { S.picks = []; render(); }
+    else if (a === "ordcheck") checkOrder();
     else if (a === "reveal") { S.revealed = true; render(); }
     else if (a === "knew") answer(true);
     else if (a === "missed") answer(false);
@@ -690,20 +1204,28 @@ section.block > h2 { font-size: 1.15rem; margin-bottom: 12px; }
     else if (a === "retry") { var m = S.results.filter(function (r) { return !r.ok; }).map(function (r) { return r.id; }); startSession("Retry missed", m); }
     else if (a === "reset") {
       if (!resetArmed) { resetArmed = true; render(); }
-      else { resetArmed = false; P = { v: 1, u: 0, items: {}, sessions: [] }; save(); render(); }
+      else { resetArmed = false; P = { v: 1, u: 0, size: P.size || 10, items: {}, sessions: [] }; save(); render(); }
     }
   });
 
   document.addEventListener("keydown", function (e) {
     if (view !== "quiz" || !S || e.ctrlKey || e.metaKey || e.altKey) return;
     var q = byId[S.queue[S.i].id];
-    var onButton = document.activeElement && document.activeElement.tagName === "BUTTON";
+    var ty = typeOf(q);
+    var ae = document.activeElement;
+    if (ae && ae.id === "cmd-input") {
+      if (e.key === "Enter") { e.preventDefault(); checkCmd(); }
+      return;
+    }
+    var onButton = ae && ae.tagName === "BUTTON";
     var i = "1234".indexOf(e.key);
     if (i < 0) i = "abcd".indexOf(e.key.toLowerCase());
-    if (!q.r && !S.answered && i >= 0 && e.key.length === 1) { e.preventDefault(); choose(i); return; }
+    if (ty === "mc" && !S.answered && i >= 0 && e.key.length === 1) { e.preventDefault(); choose(i); return; }
     if (e.key === "Enter" && !onButton) {
       e.preventDefault();
-      if (q.r && !S.revealed) { S.revealed = true; render(); }
+      if (ty === "recall" && !S.revealed) { S.revealed = true; render(); }
+      else if (ty === "cmd" && !S.answered) { checkCmd(); }
+      else if (ty === "order" && !S.answered) { checkOrder(); }
       else if (S.answered) next();
     }
   });
