@@ -9,7 +9,8 @@ Each phase ends with something demonstrable. Stopping after any phase still leav
   - [x] first CI workflow (GitHub Actions running pre-commit), green
   - [x] folder layout (`configs/`, `data/{raw,interim,processed}/`, `models/`, `notebooks/`, `reports/`, `scripts/`; `src/` subpackages and `deploy/` are added when first needed)
   - [x] `requires-python = ">=3.12,<3.13"` (TensorFlow supports up to 3.12)
-  - [ ] Phase 0 wrap-up: owner edits `LEARNING_LOG.md` into their own words; Claude builds the quiz artifact from `docs/QUIZ_SEED.md`
+  - [x] Phase 0 quiz artifact built (`docs/quiz/index.html`, published; see `docs/HANDOFF.md` for the link)
+  - [ ] Phase 0 wrap-up: owner edits `LEARNING_LOG.md` into their own words
 - [ ] **Phase 1 — Data & baselines (weeks 1–3):** dataset choice, Postgres + SQL queries, DVC, EDA, TF-IDF + logistic regression / XGBoost / LightGBM, evaluation harness with bootstrap CIs, calibration, error analysis.
   *Done when:* one command reproduces the baseline table.
 - [ ] **Phase 2 — Deep model (weeks 4–6):** PyTorch + Hugging Face fine-tuning, domain-adaptive pretraining, augmentation experiments, MLflow tracking, Optuna tuning.
