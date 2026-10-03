@@ -12,6 +12,11 @@ Each phase ends with something demonstrable. Stopping after any phase still leav
   - [x] Phase 0 quiz artifact built (`docs/quiz/index.html`, published; see `docs/HANDOFF.md` for the link)
   - [ ] Phase 0 wrap-up: owner edits `LEARNING_LOG.md` into their own words
 - [ ] **Phase 1 — Data & baselines (weeks 1–3):** dataset choice, Postgres + SQL queries, DVC, EDA, TF-IDF + logistic regression / XGBoost / LightGBM, evaluation harness with bootstrap CIs, calibration, error analysis.
+  - [x] dataset choice: Banking77 (`docs/DECISIONS.md`, `docs/DATASET_EVALUATION.md`)
+  - [ ] dependencies, reproducible data download script, first look at the data
+  - [ ] EDA (class counts, length median/p90/p99, near-duplicate intents)
+  - [ ] Postgres + SQL, DVC
+  - [ ] baselines, evaluation harness, calibration, error analysis
   *Done when:* one command reproduces the baseline table.
 - [ ] **Phase 2 — Deep model (weeks 4–6):** PyTorch + Hugging Face fine-tuning, domain-adaptive pretraining, augmentation experiments, MLflow tracking, Optuna tuning.
   *Done when:* transformer vs baselines compared with confidence intervals.
