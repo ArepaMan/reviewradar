@@ -1,4 +1,4 @@
-# Roadmap (~14–16 weeks part-time)
+# Roadmap (about 4.5 to 9 months part-time, see `docs/TIMELINE.md` for hours per phase)
 
 Each phase ends with something demonstrable. Stopping after any phase still leaves a coherent project.
 
