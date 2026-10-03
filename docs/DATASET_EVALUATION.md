@@ -1,0 +1,44 @@
+# Phase 1: dataset evaluation (work in progress)
+
+The owner is evaluating four candidates one at a time, then decides. Record the final choice in `docs/DECISIONS.md`. Evidence below comes from the owner's screenshots and notes, not from verified downloads. Claude could not open dataset pages from the cloud session (network blocked), so anything marked "unverified" must be checked by the owner.
+
+## Criteria (agreed in chat)
+1. **Label meaning:** does the label correspond to a real triage or routing decision?
+2. **Text realism:** real, messy text versus templated or synthetic text (synthetic text can make baselines look unrealistically good).
+3. **Difficulty and balance:** hard enough to show a transformer beating TF-IDF, but not mostly noise; class balance.
+4. **Size and cost:** fits a laptop and free GPUs; works with Postgres in Phase 1.
+5. **License:** safe for a public portfolio repo.
+6. **Fit with later phases:** SQL practice (Phase 1), RAG over documents (Phase 4), drift over time (Phase 6).
+
+## Candidates and status
+| Dataset | Status | Link |
+|---|---|---|
+| Amazon Reviews 2023 | Evidence collected (below) | https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023 and https://amazon-reviews-2023.github.io/ |
+| Bitext customer support | Waiting for the owner's evidence (license, columns, intents, 15-20 sample rows) | https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset |
+| Banking77 | Waiting | https://huggingface.co/datasets/PolyAI/banking77 |
+| CFPB Consumer Complaint Database | Waiting | https://www.consumerfinance.gov/data-research/consumer-complaints/ |
+
+What to collect for each remaining candidate: license text, row count, column names, the label list or label count, and 15-20 sample rows pasted as text. For CFPB also: which column is the label (Product or Issue) and how many narratives exist. Do not commit data files (`data/*/*` is ignored).
+
+## Amazon Reviews 2023: evidence so far
+- Fields (reviews): `rating` (1.0-5.0), `title`, `text`, `images`, `asin`, `parent_asin`, `user_id`, `timestamp` (unix), `verified_purchase`, `helpful_vote`.
+- Fields (item metadata): `main_category`, `title`, `average_rating`, `rating_number`, `features`, `description`, `price`, `images`, `videos`, `store`, `categories` (hierarchical), `details`, `parent_asin`, `bought_together`. Reviews join to products on `parent_asin`.
+- Size: split by category. Small ones: Subscription_Boxes about 16K ratings, Magazine_Subscriptions about 71K, Digital_Music about 130K, Gift_Cards about 152K. Huge ones: Clothing_Shoes_and_Jewelry about 66M, Books about 29.5M. Any category used needs a sample.
+- Average review length (tokens / ratings from the dataset card table): Video_Games about 76, Grocery_and_Gourmet_Food about 41, Toys_and_Games about 43. Averages hide the long tail: compute median and p90/p99 in EDA before choosing a model max length (128 vs 256 vs 512).
+- License: the owner found no explicit license (described as for academic or educational use; unverified). Safe practice: never redistribute the data, cite the paper, tell readers to download it themselves.
+- Citation: Hou, Yupeng; Li, Jiacheng; He, Zhankui; Yan, An; Chen, Xiusi; McAuley, Julian. "Bridging Language and Items for Retrieval and Recommendation". arXiv:2403.03952, 2024.
+- Owner's tentative category if Amazon wins: Toys_and_Games (variety of product types). Caveat: 16.3M ratings, must sample (about 100K-200K).
+
+Scorecard (Claude's view so far):
+| Criterion | Amazon |
+|---|---|
+| Label meaning | Weak: rating is sentiment, not triage; the task would have to be defined (for example flag 1-2 star reviews, or predict subcategory from `categories`) |
+| Text realism | Strong |
+| Difficulty and balance | Moderate: ratings are noisy, 5 stars dominate (imbalanced) |
+| Size and cost | OK only with one category and a sample |
+| Phase 1 fit (SQL, Postgres) | Very strong: real relational structure, joins on `parent_asin` |
+| Later phases | Strong: product descriptions for RAG, timestamps (1996-2023) for drift |
+| License | Unclear |
+
+## Next
+Owner sends Bitext evidence next; then Banking77, then CFPB. Claude compares all four on the same criteria; the owner decides and writes a one-paragraph justification; then the decision goes into `DECISIONS.md`.
