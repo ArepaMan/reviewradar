@@ -13,7 +13,8 @@ Each phase ends with something demonstrable. Stopping after any phase still leav
   - [ ] Phase 0 wrap-up: owner edits `LEARNING_LOG.md` into their own words
 - [ ] **Phase 1 — Data & baselines (weeks 1–3):** dataset choice, Postgres + SQL queries, DVC, EDA, TF-IDF + logistic regression / XGBoost / LightGBM, evaluation harness with bootstrap CIs, calibration, error analysis.
   - [x] dataset choice: Banking77 (`docs/DECISIONS.md`, `docs/DATASET_EVALUATION.md`)
-  - [ ] dependencies, reproducible data download script, first look at the data
+  - [x] reproducible data download script (`scripts/download_data.py`)
+  - [ ] first look at the data (counts, lengths, duplicates found; cleaning code and tests pending)
   - [ ] EDA (class counts, length median/p90/p99, near-duplicate intents)
   - [ ] Postgres + SQL, DVC
   - [ ] baselines, evaluation harness, calibration, error analysis
