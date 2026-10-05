@@ -7,7 +7,7 @@ Last revised: 2026-10-03 (after Phase 0).
 | Phase | What | Estimate (hours) | Actual (hours) | Status |
 |---|---|---|---|---|
 | 0 | Setup: environment, Git, uv, tests, pre-commit, CI, layout, quiz | already done | ~3 calendar days, hours not tracked | Done (log edit pending) |
-| 1 | Data and baselines: dataset choice, Postgres and SQL, DVC, EDA, TF-IDF + logistic regression, XGBoost, LightGBM, evaluation harness with confidence intervals, calibration, error analysis | 35 - 50 | | Next |
+| 1 | Data and baselines: dataset choice, Postgres and SQL, DVC, EDA, TF-IDF + logistic regression, XGBoost, LightGBM, evaluation harness with confidence intervals, calibration, error analysis | 35 - 50 | ~10 so far (owner's estimate, 2026-10-05) | In progress |
 | 2 | Deep model: PyTorch and Hugging Face fine-tuning, domain-adaptive pretraining, augmentation, MLflow, Optuna | 45 - 65 | | |
 | 3 | Second framework and optimization: Keras/TensorFlow, ONNX and TFLite export, quantization, benchmarks | 30 - 45 | | |
 | 4 | Serving and RAG: FastAPI, tests, Docker, embeddings and pgvector, retrieval evaluation | 40 - 55 | | |
